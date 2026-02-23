@@ -54,6 +54,11 @@ p {
   }
 }
 
+/* Hide scrollbar for horizontal galleries */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection {
   background-color: var(--color-gold);
   color: var(--color-soft-white);

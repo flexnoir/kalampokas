@@ -15,17 +15,18 @@ export default function Portfolio({ images }: PortfolioProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Horizontal scroll: translate gallery based on vertical scroll
+  // Subtle horizontal shift on vertical scroll (just a teaser, not full gallery)
   const galleryX = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", `-${Math.max(0, (images.length - 2) * 20)}%`]
+    ["0%", "-15%"]
   );
 
   if (images.length === 0) return null;
@@ -62,45 +63,58 @@ export default function Portfolio({ images }: PortfolioProps) {
         </div>
       </div>
 
-      {/* Desktop: horizontal scroll gallery */}
+      {/* Desktop: horizontal scroll gallery — drag to explore */}
       <div ref={containerRef} className="hidden md:block overflow-hidden">
         <motion.div
           style={{ x: galleryX }}
-          className="flex gap-4 pl-16 pr-[20vw]"
         >
-          {images.map((img, i) => (
-            <motion.button
-              key={img.src}
-              onClick={() => {
-                setLightboxIndex(i);
-                setLightboxOpen(true);
-              }}
-              className="relative shrink-0 overflow-hidden group"
-              style={{
-                width: i % 3 === 0 ? "45vw" : "30vw",
-                height: i % 3 === 0 ? "60vh" : "50vh",
-              }}
-              whileHover={{ scale: 0.98 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                sizes="45vw"
-              />
-              <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-colors duration-700" />
+          <div
+            ref={scrollRef}
+            className="flex gap-4 pl-16 overflow-x-auto pr-16 pb-4 scrollbar-hide"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {images.map((img, i) => (
+              <button
+                key={img.src}
+                onClick={() => {
+                  setLightboxIndex(i);
+                  setLightboxOpen(true);
+                }}
+                className="relative shrink-0 overflow-hidden group"
+                style={{
+                  width: i % 3 === 0 ? "45vw" : "30vw",
+                  height: i % 3 === 0 ? "60vh" : "50vh",
+                }}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                  sizes="45vw"
+                />
+                <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition-colors duration-700" />
 
-              {/* Image caption on hover */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <span className="text-[11px] uppercase tracking-[0.25em] text-soft-white/80 font-sans font-light">
-                  {img.alt}
-                </span>
-              </div>
-            </motion.button>
-          ))}
+                {/* Caption on hover */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="text-[11px] uppercase tracking-[0.25em] text-soft-white/80 font-sans font-light">
+                    {img.alt}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
         </motion.div>
+
+        {/* Scroll hint */}
+        <div className="mt-6 text-center">
+          <span className="text-[10px] uppercase tracking-[0.35em] text-warm-gray/40 font-sans font-light">
+            Drag to explore &rarr;
+          </span>
+        </div>
       </div>
 
       <Lightbox

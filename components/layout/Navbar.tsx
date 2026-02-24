@@ -13,10 +13,19 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      const press = document.getElementById("press");
+      if (press) {
+        const rect = press.getBoundingClientRect();
+        setHidden(rect.top <= 0 && rect.bottom > 0);
+      }
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -27,9 +36,11 @@ export default function Navbar() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        scrolled
-          ? "bg-ivory/90 backdrop-blur-md"
-          : "bg-transparent"
+        hidden
+          ? "opacity-0 pointer-events-none -translate-y-full"
+          : scrolled
+            ? "bg-ivory/90 backdrop-blur-md"
+            : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-16">

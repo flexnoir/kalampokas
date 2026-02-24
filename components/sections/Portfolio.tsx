@@ -6,7 +6,6 @@ import Image from "next/image";
 import SectionTitle from "../ui/SectionTitle";
 import type { PortfolioImage } from "@/lib/portfolio";
 
-const GALLERY_HEIGHT_VH = 70;
 
 interface PortfolioProps {
   images: PortfolioImage[];
@@ -63,33 +62,12 @@ export default function Portfolio({ images }: PortfolioProps) {
         <SectionTitle label="Portfolio" title="A Collection of Love Stories" />
       </div>
 
-      {/* Mobile: vertical masonry with real aspect ratios */}
-      <div className="md:hidden px-4">
-        <div className="columns-2 gap-2">
-          {images.map((img) => (
-            <div
-              key={img.src}
-              className="relative w-full mb-2 overflow-hidden"
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={img.width}
-                height={img.height}
-                className="w-full h-auto"
-                sizes="50vw"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Desktop: horizontal scroll gallery — drag to explore */}
-      <div ref={containerRef} className="hidden md:block overflow-hidden">
+      {/* Horizontal scroll gallery */}
+      <div ref={containerRef} className="overflow-hidden">
         <motion.div style={{ x: galleryX }}>
           <div
             ref={scrollRef}
-            className="flex gap-4 pl-16 overflow-x-auto pr-16 pb-4 scrollbar-hide select-none items-start"
+            className="flex gap-3 md:gap-4 pl-4 md:pl-16 overflow-x-auto pr-4 md:pr-16 pb-4 scrollbar-hide select-none items-start [--gallery-h:55vh] md:[--gallery-h:70vh]"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -107,8 +85,8 @@ export default function Portfolio({ images }: PortfolioProps) {
                   key={img.src}
                   className="relative shrink-0 overflow-hidden"
                   style={{
-                    height: `${GALLERY_HEIGHT_VH}vh`,
-                    width: `calc(${GALLERY_HEIGHT_VH}vh * ${aspect})`,
+                    height: "var(--gallery-h)",
+                    width: `calc(var(--gallery-h) * ${aspect})`,
                   }}
                 >
                   <Image
@@ -117,7 +95,7 @@ export default function Portfolio({ images }: PortfolioProps) {
                     fill
                     draggable={false}
                     className="object-contain pointer-events-none"
-                    sizes={`${Math.round(GALLERY_HEIGHT_VH * aspect)}vh`}
+                    sizes="40vw"
                   />
                 </div>
               );
@@ -127,7 +105,8 @@ export default function Portfolio({ images }: PortfolioProps) {
 
         <div className="mt-6 text-center">
           <span className="text-[10px] uppercase tracking-[0.35em] text-warm-gray/40 font-sans font-light">
-            Drag to explore &rarr;
+            <span className="hidden md:inline">Drag to explore &rarr;</span>
+            <span className="md:hidden">Swipe to explore &rarr;</span>
           </span>
         </div>
       </div>

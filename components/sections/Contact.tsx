@@ -55,7 +55,7 @@ export default function Contact() {
 
         <AnimateOnScroll>
           <p className="text-center text-warm-gray/60 text-[13px] font-sans font-light tracking-wider uppercase mb-10 md:mb-14">
-            Currently booking 2025 &middot; Limited availability
+            Currently booking 2026-2027 &middot; Limited availability
           </p>
         </AnimateOnScroll>
 

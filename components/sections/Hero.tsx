@@ -26,7 +26,7 @@ export default function Hero() {
         className="absolute inset-0"
       >
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero-v2.jpg"
           alt="Editorial destination wedding photography"
           fill
           priority

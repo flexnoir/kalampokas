@@ -36,11 +36,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-24">
           <Link
             href="/"
-            className={`font-serif text-lg md:text-xl tracking-[0.1em] transition-colors duration-500 ${
+            className={`font-serif text-base md:text-lg tracking-[0.2em] uppercase transition-colors duration-500 ${
               scrolled ? "text-charcoal" : "text-soft-white"
             }`}
           >
-            Kalampokas
+            Lefteris Kalampokas
           </Link>
 
           {/* Desktop nav */}
@@ -88,8 +88,20 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="md:hidden fixed inset-0 top-0 bg-ivory/98 backdrop-blur-md z-40"
+            className="md:hidden fixed inset-0 top-0 bg-ivory/98 backdrop-blur-md z-[60]"
           >
+            {/* Close button */}
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="absolute top-0 right-0 p-6 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Close menu"
+            >
+              <div className="flex flex-col gap-[5px]">
+                <span className="block w-5 h-px bg-charcoal rotate-45 translate-y-[3px] transition-all duration-500" />
+                <span className="block w-5 h-px bg-charcoal -rotate-45 -translate-y-[3px] transition-all duration-500" />
+              </div>
+            </button>
+
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, i) => (
                 <motion.a

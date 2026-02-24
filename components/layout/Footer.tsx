@@ -8,7 +8,7 @@ export default function Footer() {
             Kalampokas Fotografia
           </span>
           <p className="mt-3 text-soft-white/30 text-[12px] font-sans font-light tracking-wider">
-            Greece &middot; Italy &middot; South of France
+            Greece &middot; Worldwide
           </p>
         </div>
 

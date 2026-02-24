@@ -4,21 +4,21 @@ import PressCard from "../ui/PressCard";
 const pressFeatures = [
   {
     title: "Embracing Airy, Greek Summer Vibes at Ammoa Luxury Hotel & Spa Resort",
-    coverImage: "/images/journal-1.jpg",
-    url: "https://stylemepretty.com",
+    coverImage: "/images/press-1.jpg",
+    url: "https://www.stylemepretty.com/2025/03/10/embracing-airy-greek-summer-vibes-at-ammoa-luxury-hotel-spa-resort/",
     publication: "Style Me Pretty",
   },
   {
-    title: "A Bohemian Dream Wedding in Mykonos",
-    coverImage: "/images/journal-2.jpg",
-    url: "https://magnoliarouge.com",
-    publication: "Magnolia Rouge",
+    title: "Lightness and Elegance in Corfu",
+    coverImage: "/images/press-2-v2.jpg",
+    url: "https://amberandmuse.com/lightness-and-elegance-in-corfu/",
+    publication: "Amber & Muse",
   },
   {
-    title: "Elegant Corfu Wedding Featured on Ellwed",
-    coverImage: "/images/journal-3.jpg",
-    url: "https://ellwed.com",
-    publication: "Ellwed",
+    title: "A Vintage Wedding for Angeliki and Kyriakos",
+    coverImage: "/images/press-3.webp",
+    url: "https://caratsandcake.com/wedding/angeliki-and-kyriakos",
+    publication: "Carats & Cake",
   },
 ];
 

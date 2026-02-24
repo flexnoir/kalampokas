@@ -27,12 +27,17 @@ export default function Footer() {
           </a>
           <span className="text-soft-white/10">|</span>
           <a
-            href="mailto:hello@kalampokasfotografia.com"
+            href="mailto:info@kalampokasfotografia.gr"
             className="text-[11px] uppercase tracking-[0.25em] text-soft-white/40 font-sans font-light hover:text-gold/70 transition-colors duration-500 py-2"
           >
             Email
           </a>
         </div>
+
+        {/* Email */}
+        <p className="mt-4 text-center text-[11px] tracking-[0.15em] text-soft-white/25 font-sans font-light">
+          info@kalampokasfotografia.gr
+        </p>
 
         {/* Copyright */}
         <p className="mt-10 text-center text-[10px] tracking-[0.2em] text-soft-white/20 font-sans font-light">

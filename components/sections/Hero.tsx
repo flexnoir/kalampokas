@@ -76,7 +76,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 3.6 }}
           className="mt-5 text-soft-white/40 text-[12px] sm:text-[13px] font-sans font-light tracking-[0.15em]"
         >
-          Greece &middot; Italy &middot; South of France
+          Greece &middot; Worldwide
         </motion.p>
 
         <motion.a

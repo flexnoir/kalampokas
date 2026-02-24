@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import PageLoader from "@/components/ui/PageLoader";
 import CustomCursor from "@/components/ui/CustomCursor";
 import "./globals.css";
@@ -76,9 +74,7 @@ export default function RootLayout({
       <body className="antialiased overflow-x-hidden">
         <PageLoader />
         <CustomCursor />
-        <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );

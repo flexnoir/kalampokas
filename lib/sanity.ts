@@ -4,5 +4,28 @@ export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   apiVersion: "2024-01-01",
-  useCdn: true,
+  useCdn: false,
 });
+
+export const writeClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  apiVersion: "2024-01-01",
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+});
+
+// GROQ queries
+export const offerBySlugQuery = `*[_type == "offer" && slug.current == $slug][0]{
+  _id,
+  clientName,
+  clientEmail,
+  slug,
+  eventDate,
+  eventLocation,
+  packagePrices,
+  addonPrices,
+  isExpired,
+  status,
+  createdAt
+}`;

@@ -49,7 +49,7 @@ p {
 
 /* Hide default cursor on desktop when custom cursor is active */
 @media (pointer: fine) {
-  * {
+  .custom-cursor-scope * {
     cursor: none !important;
   }
 }

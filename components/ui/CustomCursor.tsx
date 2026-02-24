@@ -1,11 +1,15 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
+  const pathname = usePathname();
   const [hovered, setHovered] = useState(false);
   const [visible, setVisible] = useState(false);
+
+  const isStudio = pathname.startsWith("/studio");
 
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
@@ -62,7 +66,7 @@ export default function CustomCursor() {
     };
   }, [handleMouseMove]);
 
-  if (!visible) return null;
+  if (!visible || isStudio) return null;
 
   return (
     <>

@@ -73,6 +73,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
       <OfferTestimonials testimonials={offer.testimonials} />
       <OfferGallery images={offer.galleryImages} />
       <OfferResponse
+        offerId={offer.id}
         selectedPackage={selectedPackage}
         selectedAddOns={selectedAddOns}
         totalPrice={totalPrice}

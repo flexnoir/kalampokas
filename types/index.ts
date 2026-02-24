@@ -51,4 +51,6 @@ export interface OfferData {
   testimonials: OfferTestimonial[];
   galleryImages: string[];
   photographerName: string;
+  status: "draft" | "sent" | "accepted";
+  isExpired: boolean;
 }

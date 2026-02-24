@@ -6,6 +6,7 @@ import AnimateOnScroll from "@/components/ui/AnimateOnScroll";
 import type { OfferPackage, OfferAddOn } from "@/types";
 
 interface OfferResponseProps {
+  offerId: string;
   selectedPackage: OfferPackage | null;
   selectedAddOns: OfferAddOn[];
   totalPrice: number;
@@ -21,21 +22,33 @@ function formatPrice(price: number): string {
 }
 
 export default function OfferResponse({
+  offerId,
   selectedPackage,
   selectedAddOns,
   totalPrice,
 }: OfferResponseProps) {
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "accepted">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "accepted" | "error">("idle");
 
-  const handleAccept = () => {
-    setStatus("accepted");
+  const handleAccept = async () => {
+    setStatus("sending");
+    try {
+      const res = await fetch(`/api/offers/${offerId}/respond`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setStatus("accepted");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const inputClasses =
     "w-full bg-transparent border-b border-warm-gray/20 py-4 text-charcoal font-sans text-[14px] font-light tracking-wide placeholder:text-warm-gray/40 focus:border-gold/60 focus:outline-none transition-colors duration-500";
 
-  if (status !== "idle") {
+  if (status === "accepted") {
     return (
       <section className="py-16 md:py-32 bg-soft-white">
         <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
@@ -141,10 +154,21 @@ export default function OfferResponse({
           <div className="mt-10 text-center">
             <button
               onClick={handleAccept}
-              className="inline-block bg-charcoal text-ivory text-[11px] uppercase tracking-[0.3em] font-sans font-light px-12 py-4 border border-charcoal hover:bg-charcoal/90 transition-all duration-500"
+              disabled={!selectedPackage || status === "sending"}
+              className="inline-block bg-charcoal text-ivory text-[11px] uppercase tracking-[0.3em] font-sans font-light px-12 py-4 border border-charcoal hover:bg-charcoal/90 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Accept Proposal
+              {status === "sending" ? "Sending..." : "Accept Proposal"}
             </button>
+            {!selectedPackage && (
+              <p className="mt-4 text-[13px] text-warm-gray/60 font-sans font-light">
+                Please select a collection above to proceed.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="mt-4 text-[13px] text-muted-rose font-sans font-light">
+                Something went wrong. Please try again.
+              </p>
+            )}
           </div>
         </AnimateOnScroll>
       </div>

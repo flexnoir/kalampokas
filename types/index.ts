@@ -53,4 +53,5 @@ export interface OfferData {
   photographerName: string;
   status: "draft" | "sent" | "accepted";
   isExpired: boolean;
+  isWeddingPlanner: boolean;
 }

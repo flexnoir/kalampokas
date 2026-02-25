@@ -72,18 +72,20 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
       />
       <OfferTestimonials testimonials={offer.testimonials} />
       <OfferGallery images={offer.galleryImages} />
-      <OfferResponse
-        offerId={offer.id}
-        isAccepted={offer.status === "accepted"}
-        selectedPackage={selectedPackage}
-        selectedAddOns={selectedAddOns}
-        totalPrice={totalPrice}
-      />
+      {!offer.isWeddingPlanner && (
+        <OfferResponse
+          offerId={offer.id}
+          isAccepted={offer.status === "accepted"}
+          selectedPackage={selectedPackage}
+          selectedAddOns={selectedAddOns}
+          totalPrice={totalPrice}
+        />
+      )}
       <OfferFooter />
 
       {/* Sticky bottom bar — shows when a package is selected */}
       <AnimatePresence>
-        {selectedPackage && (
+        {!offer.isWeddingPlanner && selectedPackage && (
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}

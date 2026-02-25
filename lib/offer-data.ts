@@ -120,6 +120,7 @@ interface SanityOffer {
   eventLocation: string;
   packagePrices: { classic: number; refined: number; ultimate: number };
   addonPrices: Record<string, number>;
+  isWeddingPlanner: boolean;
   isExpired: boolean;
   status: string;
 }
@@ -193,5 +194,6 @@ export async function getOfferBySlug(
     photographerName: "Lefteris",
     status: sanityOffer.status as OfferData["status"] || "draft",
     isExpired: sanityOffer.isExpired ?? false,
+    isWeddingPlanner: sanityOffer.isWeddingPlanner ?? false,
   };
 }

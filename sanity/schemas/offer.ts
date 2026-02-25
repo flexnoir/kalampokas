@@ -6,6 +6,12 @@ export const offer = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "isWeddingPlanner",
+      title: "Is Wedding Planner",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
       name: "clientName",
       title: "Client Name",
       type: "string",

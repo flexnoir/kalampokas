@@ -43,6 +43,19 @@ export default function Footer() {
         <p className="mt-10 text-center text-[10px] tracking-[0.2em] text-soft-white/20 font-sans font-light">
           &copy; {new Date().getFullYear()} Kalampokas Fotografia. All rights reserved.
         </p>
+
+        {/* Credit */}
+        <p className="mt-3 text-center text-[9px] tracking-[0.2em] text-soft-white/15 font-sans font-light">
+          Crafted by{" "}
+          <a
+            href="https://flexnoir.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-soft-white/30 transition-colors duration-500"
+          >
+            flexnoir.com
+          </a>
+        </p>
       </div>
     </footer>
   );

@@ -85,7 +85,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
 
       {/* Sticky bottom bar — shows when a package is selected */}
       <AnimatePresence>
-        {!offer.isWeddingPlanner && selectedPackage && (
+        {selectedPackage && (
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}

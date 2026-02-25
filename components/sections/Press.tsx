@@ -13,7 +13,7 @@ const pressFeatures = [
   },
   {
     title: "Lightness and Elegance in Corfu",
-    coverImage: "/images/press-2-v2.jpg",
+    coverImage: "/images/press-2-v3.jpg",
     url: "https://amberandmuse.com/lightness-and-elegance-in-corfu/",
     publication: "Amber & Muse",
   },

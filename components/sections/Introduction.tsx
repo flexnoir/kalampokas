@@ -31,8 +31,8 @@ export default function Introduction() {
 
             <p className="mt-6 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
               With over a decade of experience capturing destination weddings across
-              Greece, Italy, and the South of France, I craft images that feel as
-              timeless as the love they celebrate. Every frame is an heirloom — a
+              Greece, Italy, and Europe, I craft images that feel as
+              timeless as the love they celebrate. Every frame is an heirloom - a
               quiet, honest moment preserved for generations.
             </p>
             <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">

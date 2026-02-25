@@ -51,7 +51,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-16 md:py-40 bg-soft-white">
       <div className="max-w-2xl mx-auto px-6 lg:px-8">
-        <SectionTitle label="Inquire" title="Let&rsquo;s Create Something Beautiful" />
+        <SectionTitle label="Inquire" title="Share Your Narrative" />
 
         <AnimateOnScroll>
           <p className="text-center text-warm-gray/60 text-[13px] font-sans font-light tracking-wider uppercase mb-10 md:mb-14">

@@ -18,7 +18,7 @@ export default function Footer() {
         {/* Links */}
         <div className="flex items-center justify-center gap-8">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/lefteris_kalampokas"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[11px] uppercase tracking-[0.25em] text-soft-white/40 font-sans font-light hover:text-gold/70 transition-colors duration-500 py-2"

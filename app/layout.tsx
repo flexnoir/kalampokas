@@ -24,23 +24,52 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kalampokasfotografia.gr"),
   title: "Kalampokas Fotografia | Destination Wedding Photography",
   description:
-    "Luxury destination wedding photography across Greece, Italy, and the French Riviera. Timeless, editorial imagery for the modern romantic.",
+    "Luxury destination wedding photography across Greece, Italy, and across Europe. Timeless, editorial imagery for the modern romantic.",
   keywords: [
     "destination wedding photographer",
     "luxury wedding photography",
     "Greece wedding photographer",
-    "Santorini wedding",
+    "Europe wedding photographer",
+    "Santorini wedding photographer",
+    "Mykonos wedding photographer",
+    "Corfu wedding photographer",
     "Italy wedding photographer",
+    "Amalfi Coast wedding photographer",
+    "editorial wedding photography",
+    "fine art wedding photography",
+    "elopement photographer Greece",
+    "intimate wedding photographer",
+    "Mediterranean wedding photographer",
   ],
+  alternates: {
+    canonical: "https://kalampokasfotografia.gr",
+  },
   openGraph: {
     title: "Kalampokas Fotografia | Destination Wedding Photography",
     description:
-      "Luxury destination wedding photography across Greece, Italy, and the French Riviera.",
+      "Luxury destination wedding photography across Greece, Italy, and across Europe.",
     type: "website",
     locale: "en_US",
     siteName: "Kalampokas Fotografia",
+    url: "https://kalampokasfotografia.gr",
+    images: [
+      {
+        url: "/images/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kalampokas Fotografia — Destination Wedding Photography",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kalampokas Fotografia | Destination Wedding Photography",
+    description:
+      "Luxury destination wedding photography across Greece, Italy, and across Europe.",
+    images: ["/images/og.jpg"],
   },
 };
 
@@ -48,14 +77,18 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Kalampokas Fotografia",
+  url: "https://kalampokasfotografia.gr",
   description:
-    "Luxury destination wedding photography across Greece, Italy, and the French Riviera.",
-  image: "/images/hero.jpg",
+    "Luxury destination wedding photography across Greece, Italy, and across Europe.",
+  image: "https://kalampokasfotografia.gr/images/og.jpg",
   priceRange: "$$$",
   address: {
     "@type": "PostalAddress",
     addressCountry: "GR",
   },
+  sameAs: [
+    "https://www.instagram.com/kalampokasfotografia",
+  ],
 };
 
 export default function RootLayout({

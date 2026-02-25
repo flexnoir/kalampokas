@@ -7,20 +7,20 @@ const testimonials = [
   {
     quote:
       "He didn't just photograph our wedding — he preserved the feeling of it. Every image takes us right back to that magical evening in Santorini.",
-    couple: "Maria & Nikos",
-    location: "Santorini",
+    couple: "Elizabeth & Christopher",
+    location: "Mykonos",
   },
   {
     quote:
       "Effortlessly elegant, impossibly talented, and the kindest soul. Our photos are our most treasured possession.",
-    couple: "Sophie & James",
-    location: "Tuscany",
+    couple: "Claudia & Tiago",
+    location: "Milano",
   },
   {
     quote:
       "We wanted someone who would capture the quiet, candid moments — and that's exactly what we received. Pure art.",
-    couple: "Clara & Etienne",
-    location: "Côte d'Azur",
+    couple: "Carol & Alex",
+    location: "Athens",
   },
 ];
 

@@ -19,29 +19,21 @@ export default function About() {
 
         <AnimateOnScroll delay={0.2}>
           <div className="max-w-lg">
-            <p className="text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-              Born and raised in Greece, I fell in love with photography while
-              documenting the light of the Mediterranean - the way it dances on
-              whitewashed walls, how it softens at the golden hour, how it paints
-              every love story with warmth.
-            </p>
-            <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-              Over the past twelve years, I&apos;ve had the privilege of
-              photographing over 300 weddings across Europe&apos;s most breathtaking
-              destinations. From the whites of Mykonos to the vineyards of Firenze,
-              I bring an editorial eye and an emotional heart to every celebration.
-            </p>
-            <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-              My philosophy is simple: be present, be patient, and let the story
-              unfold. The best photographs are the ones you don&apos;t have to pose for - 
-              the stolen glance, the joyful tear, the spontaneous laughter.
-            </p>
+        <p className="text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
+  Greece gave me the light. Twelve years and three hundred weddings later, I still chase it.
+</p>
+<p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
+  I work across Europe — Mykonos, Santorini, Tuscany, Amalfi — for couples who want photographs that feel like cinema, not catalogues. No forced poses. No predictable moments. Just the real story, shot with intention.
+</p>
 
-            <div className="mt-8 w-8 h-px bg-gold/40" />
+<div className="mt-8 w-8 h-px bg-gold/40" />
 
-            <p className="mt-6 text-warm-gray/60 text-[13px] leading-relaxed font-sans font-light italic">
-              When I’m not behind the camera, you’ll find me exploring the Cyclades, hunting for the perfect espresso, or planning my next adventure with my wife and our dog.
-            </p>
+<p className="mt-6 text-warm-gray/60 text-[13px] leading-relaxed font-sans font-light italic">
+  Off-season: Cycladic light, strong coffee, and the company of my wife and our dog.
+</p>
+<p className="mt-3 text-warm-gray text-[13px] leading-relaxed font-sans font-light tracking-widest uppercase">
+  Based in Greece. Available worldwide.
+</p>
           </div>
         </AnimateOnScroll>
       </div>

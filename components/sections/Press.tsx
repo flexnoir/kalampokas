@@ -71,9 +71,10 @@ export default function Press() {
                       src={entry.coverImage}
                       alt={entry.title}
                       fill
-                      className="object-cover opacity-40"
+                      className="object-cover"
                       sizes="100vw"
                     />
+                    <div className="absolute inset-0 bg-black/50" />
                   </div>
 
                   <div className="relative z-10">

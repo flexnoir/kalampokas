@@ -7,6 +7,7 @@ import type { OfferPackage, OfferAddOn } from "@/types";
 
 interface OfferResponseProps {
   offerId: string;
+  isAccepted: boolean;
   selectedPackage: OfferPackage | null;
   selectedAddOns: OfferAddOn[];
   totalPrice: number;
@@ -23,6 +24,7 @@ function formatPrice(price: number): string {
 
 export default function OfferResponse({
   offerId,
+  isAccepted,
   selectedPackage,
   selectedAddOns,
   totalPrice,
@@ -136,41 +138,57 @@ export default function OfferResponse({
           </AnimateOnScroll>
         )}
 
-        {/* Message */}
-        <AnimateOnScroll delay={0.15}>
-          <div className="mt-8">
-            <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              rows={3}
-              placeholder="Leave a message (optional)..."
-              className={`${inputClasses} resize-none`}
-            />
-          </div>
-        </AnimateOnScroll>
+        {isAccepted ? (
+          <AnimateOnScroll delay={0.15}>
+            <div className="mt-10 text-center">
+              <div className="w-8 h-px bg-gold/40 mx-auto" />
+              <p className="mt-6 font-serif text-xl md:text-2xl font-light text-charcoal">
+                Proposal Accepted
+              </p>
+              <p className="mt-3 text-warm-gray text-[14px] font-sans font-light leading-relaxed">
+                Thank you for your trust. I&apos;ll be in touch soon with the next steps.
+              </p>
+            </div>
+          </AnimateOnScroll>
+        ) : (
+          <>
+            {/* Message */}
+            <AnimateOnScroll delay={0.15}>
+              <div className="mt-8">
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  rows={3}
+                  placeholder="Leave a message (optional)..."
+                  className={`${inputClasses} resize-none`}
+                />
+              </div>
+            </AnimateOnScroll>
 
-        {/* Buttons */}
-        <AnimateOnScroll delay={0.2}>
-          <div className="mt-10 text-center">
-            <button
-              onClick={handleAccept}
-              disabled={!selectedPackage || status === "sending"}
-              className="inline-block bg-charcoal text-ivory text-[11px] uppercase tracking-[0.3em] font-sans font-light px-12 py-4 border border-charcoal hover:bg-charcoal/90 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {status === "sending" ? "Sending..." : "Accept Proposal"}
-            </button>
-            {!selectedPackage && (
-              <p className="mt-4 text-[13px] text-warm-gray/60 font-sans font-light">
-                Please select a collection above to proceed.
-              </p>
-            )}
-            {status === "error" && (
-              <p className="mt-4 text-[13px] text-muted-rose font-sans font-light">
-                Something went wrong. Please try again.
-              </p>
-            )}
-          </div>
-        </AnimateOnScroll>
+            {/* Buttons */}
+            <AnimateOnScroll delay={0.2}>
+              <div className="mt-10 text-center">
+                <button
+                  onClick={handleAccept}
+                  disabled={!selectedPackage || status === "sending"}
+                  className="inline-block bg-charcoal text-ivory text-[11px] uppercase tracking-[0.3em] font-sans font-light px-12 py-4 border border-charcoal hover:bg-charcoal/90 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === "sending" ? "Sending..." : "Accept Proposal"}
+                </button>
+                {!selectedPackage && (
+                  <p className="mt-4 text-[13px] text-warm-gray/60 font-sans font-light">
+                    Please select a collection above to proceed.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="mt-4 text-[13px] text-muted-rose font-sans font-light">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+              </div>
+            </AnimateOnScroll>
+          </>
+        )}
       </div>
     </section>
   );

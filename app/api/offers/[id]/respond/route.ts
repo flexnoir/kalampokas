@@ -32,11 +32,8 @@ export async function POST(
       );
     }
 
-    // Update status to accepted in Sanity (both published and draft)
-    const transaction = writeClient.transaction();
-    transaction.patch(offer._id, (p) => p.set({ status: "accepted" }));
-    transaction.patch(`drafts.${offer._id}`, (p) => p.set({ status: "accepted" }));
-    await transaction.commit();
+    // Update status to accepted in Sanity
+    await writeClient.patch(offer._id).set({ status: "accepted" }).commit();
 
     // Send notification email
     const contactEmail = process.env.CONTACT_EMAIL;

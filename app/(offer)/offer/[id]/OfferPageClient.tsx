@@ -74,6 +74,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
       <OfferGallery images={offer.galleryImages} />
       <OfferResponse
         offerId={offer.id}
+        isAccepted={offer.status === "accepted"}
         selectedPackage={selectedPackage}
         selectedAddOns={selectedAddOns}
         totalPrice={totalPrice}

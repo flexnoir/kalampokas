@@ -29,9 +29,5 @@ export default async function OfferPage({ params }: OfferPageProps) {
     return <OfferStatusMessage type="expired" />;
   }
 
-  if (offer.status === "accepted") {
-    return <OfferStatusMessage type="accepted" />;
-  }
-
   return <OfferPageClient offer={offer} />;
 }

@@ -31,6 +31,7 @@ export default function Navbar() {
   }, []);
 
   return (
+    <>
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -91,7 +92,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu — fullscreen overlay */}
+    </motion.nav>
+
+      {/* Mobile menu — fullscreen overlay (outside nav to avoid transform issues) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -99,7 +102,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="md:hidden fixed inset-0 top-0 bg-ivory/98 backdrop-blur-md z-[60]"
+            className="md:hidden fixed inset-0 bg-ivory/98 backdrop-blur-md z-[60]"
           >
             {/* Close button */}
             <button
@@ -131,6 +134,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }

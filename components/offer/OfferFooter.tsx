@@ -9,7 +9,10 @@ export default function OfferFooter() {
             Kalampokas Fotografia
           </span>
           <div className="mt-4 w-6 h-px bg-gold/30 mx-auto" />
-          <span className="block mt-4 text-[10px] text-warm-gray/40 font-sans font-light tracking-wider">
+          <span className="block mt-4 text-[11px] text-warm-gray/40 font-sans font-light tracking-wide">
+            info@kalampokasfotografia.gr
+          </span>
+          <span className="block mt-3 text-[10px] text-warm-gray/30 font-sans font-light tracking-wider">
             This proposal is confidential and intended solely for the recipient.
           </span>
         </AnimateOnScroll>

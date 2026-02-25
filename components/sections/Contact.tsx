@@ -98,8 +98,10 @@ export default function Contact() {
                 <div>
                   <input
                     {...register("date")}
-                    type="date"
+                    type="text"
                     placeholder="Wedding Date"
+                    onFocus={(e) => (e.target.type = "date")}
+                    onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
                     className={inputClasses}
                   />
                   {errors.date && (

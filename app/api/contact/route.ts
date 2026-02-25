@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
-      from: "Kalampokas Fotografia <onboarding@resend.dev>",
+      from: "Kalampokas Fotografia <noreply@send.kalampokasfotografia.gr>",
       to: process.env.CONTACT_EMAIL || "hello@kalampokasfotografia.com",
       subject: `New Inquiry from ${data.name}`,
       html: `

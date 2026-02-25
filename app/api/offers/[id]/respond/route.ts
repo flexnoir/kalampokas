@@ -39,7 +39,7 @@ export async function POST(
     const contactEmail = process.env.CONTACT_EMAIL;
     if (contactEmail && process.env.RESEND_API_KEY !== "re_your_api_key") {
       await resend.emails.send({
-        from: "Kalampokas Fotografia <noreply@kalampokasfotografia.gr>",
+        from: "Kalampokas Fotografia <noreply@send.kalampokasfotografia.gr>",
         to: contactEmail,
         subject: `Offer Accepted: ${offer.clientName}`,
         html: `

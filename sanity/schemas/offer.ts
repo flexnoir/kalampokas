@@ -6,6 +6,20 @@ export const offer = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "eventType",
+      title: "Event Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Wedding", value: "wedding" },
+          { title: "Christening", value: "christening" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "wedding",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "isWeddingPlanner",
       title: "Is Wedding Planner",
       type: "boolean",
@@ -44,9 +58,17 @@ export const offer = defineType({
       type: "string",
     }),
     defineField({
+      name: "christeningPrice",
+      title: "Christening Price",
+      type: "number",
+      validation: (rule) => rule.min(0),
+      hidden: ({ parent }) => parent?.eventType !== "christening",
+    }),
+    defineField({
       name: "packagePrices",
       title: "Package Prices",
       type: "object",
+      hidden: ({ parent }) => parent?.eventType === "christening",
       fields: [
         defineField({
           name: "classic",
@@ -72,6 +94,7 @@ export const offer = defineType({
       name: "addonPrices",
       title: "Add-on Prices",
       type: "object",
+      hidden: ({ parent }) => parent?.eventType === "christening",
       fields: [
         defineField({
           name: "extraHour",
@@ -176,11 +199,13 @@ export const offer = defineType({
       title: "clientName",
       subtitle: "eventDate",
       status: "status",
+      eventType: "eventType",
     },
-    prepare({ title, subtitle, status }) {
+    prepare({ title, subtitle, status, eventType }) {
+      const type = eventType === "christening" ? "Christening" : "Wedding";
       return {
         title: title || "Untitled Offer",
-        subtitle: `${subtitle || "No date"} — ${status || "draft"}`,
+        subtitle: `${type} — ${subtitle || "No date"} — ${status || "draft"}`,
       };
     },
   },

@@ -51,6 +51,7 @@ export interface OfferData {
   testimonials: OfferTestimonial[];
   galleryImages: string[];
   photographerName: string;
+  eventType: "wedding" | "christening";
   status: "draft" | "sent" | "accepted";
   isExpired: boolean;
   isWeddingPlanner: boolean;

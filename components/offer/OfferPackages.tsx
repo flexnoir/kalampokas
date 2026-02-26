@@ -29,7 +29,9 @@ export default function OfferPackages({
       <div className="max-w-6xl mx-auto px-6 lg:px-16">
         <SectionTitle label="Collections" title="Choose Your Experience" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10">
+        <div className={`grid grid-cols-1 gap-8 md:gap-6 lg:gap-10 ${
+          packages.length === 1 ? "max-w-md mx-auto" : "md:grid-cols-3"
+        }`}>
           {packages.map((pkg, i) => {
             const isSelected = selectedPackageId === pkg.id;
 

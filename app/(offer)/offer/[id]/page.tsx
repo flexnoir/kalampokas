@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: OfferPageProps): Promise<Meta
   if (!offer) return { title: "Offer Not Found", ...noIndex };
 
   return {
-    title: `Wedding Photography Proposal for ${offer.clientName} | Kalampokas Fotografia`,
+    title: `${offer.eventType === "christening" ? "Christening" : "Wedding"} Photography Proposal for ${offer.clientName} | Kalampokas Fotografia`,
     ...noIndex,
   };
 }

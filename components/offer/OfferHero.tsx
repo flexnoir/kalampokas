@@ -8,9 +8,10 @@ interface OfferHeroProps {
   clientName: string;
   eventDate: string;
   eventLocation: string;
+  eventType: "wedding" | "christening";
 }
 
-export default function OfferHero({ clientName, eventDate, eventLocation }: OfferHeroProps) {
+export default function OfferHero({ clientName, eventDate, eventLocation, eventType }: OfferHeroProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -55,7 +56,7 @@ export default function OfferHero({ clientName, eventDate, eventLocation }: Offe
           transition={{ duration: 1.2, delay: 0.3 }}
           className="text-soft-white/50 text-[10px] sm:text-[11px] uppercase tracking-[0.5em] font-sans font-light"
         >
-          Wedding Photography Proposal
+          {eventType === "christening" ? "Christening Photography Proposal" : "Wedding Photography Proposal"}
         </motion.span>
 
         <motion.div

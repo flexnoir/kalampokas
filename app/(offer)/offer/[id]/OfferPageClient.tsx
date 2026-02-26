@@ -55,6 +55,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
         clientName={offer.clientName}
         eventDate={offer.eventDate}
         eventLocation={offer.eventLocation}
+        eventType={offer.eventType}
       />
       <OfferIntro
         introText={offer.introText}
@@ -65,11 +66,13 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
         selectedPackageId={selectedPackageId}
         onSelectPackage={setSelectedPackageId}
       />
-      <OfferAddOns
-        addOns={offer.addOns}
-        selectedAddOnIds={selectedAddOnIds}
-        onToggleAddOn={toggleAddOn}
-      />
+      {offer.addOns.length > 0 && (
+        <OfferAddOns
+          addOns={offer.addOns}
+          selectedAddOnIds={selectedAddOnIds}
+          onToggleAddOn={toggleAddOn}
+        />
+      )}
       <OfferTestimonials testimonials={offer.testimonials} />
       <OfferGallery images={offer.galleryImages} />
       {!offer.isWeddingPlanner && (

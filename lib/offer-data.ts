@@ -1,8 +1,9 @@
-import type { OfferData, OfferPackage, OfferAddOn } from "@/types";
+import type { OfferData, OfferPackage, OfferAddOn, OfferTestimonial } from "@/types";
 import { client, offerBySlugQuery } from "@/lib/sanity";
 
-// Hardcoded package definitions — only prices come from Sanity
-const packageDefinitions: Omit<OfferPackage, "price">[] = [
+// ─── Wedding content ───
+
+const weddingPackages: Omit<OfferPackage, "price">[] = [
   {
     id: "classic",
     name: "Classic Elegance",
@@ -54,7 +55,7 @@ const packageDefinitions: Omit<OfferPackage, "price">[] = [
   },
 ];
 
-const addonDefinitions: Omit<OfferAddOn, "price" | "percentageCost">[] = [
+const weddingAddons: Omit<OfferAddOn, "price" | "percentageCost">[] = [
   {
     id: "extra-hour",
     name: "Extra Hour of Coverage",
@@ -97,7 +98,77 @@ const addonDefinitions: Omit<OfferAddOn, "price" | "percentageCost">[] = [
   },
 ];
 
-// Map addon ID (kebab-case) to Sanity field name (camelCase)
+const weddingGallery = [
+  "/images/portfolio/11-ethereal-veil.jpg",
+  "/images/portfolio/08-seaside-reception.jpg",
+  "/images/portfolio/05-bridal-veil-detail.jpg",
+  "/images/portfolio/09-luxury-reception-setup.jpg",
+  "/images/portfolio/10-garden-dinner.jpg",
+];
+
+const weddingTestimonials: OfferTestimonial[] = [
+  {
+    quote:
+      "Lefteris didn't just photograph our wedding — he preserved the very feeling of it. Every image tells a story we get to relive again and again.",
+    couple: "Elena & Dimitris",
+    location: "Mykonos, Greece",
+  },
+  {
+    quote:
+      "Our photos are our most treasured possession. Pure art, captured with heart. We couldn't have dreamed of anything more beautiful.",
+    couple: "Sophie & James",
+    location: "Amalfi Coast, Italy",
+  },
+];
+
+function weddingIntroText(clientName: string): string {
+  return `Dear ${clientName},\n\nThank you so much for considering me to be part of your special day. It would be an absolute honour to capture your love story against the breathtaking backdrop of your celebration.\n\nPlease take your time reviewing the collections below. Each one has been thoughtfully designed to ensure your memories are preserved with the artistry and care they deserve. I'm always here to discuss any details or create something entirely bespoke for you.`;
+}
+
+// ─── Christening content ───
+
+const christeningPackage: Omit<OfferPackage, "price"> = {
+  id: "christening",
+  name: "Christening Coverage",
+  description:
+    "A thoughtful photography experience designed to preserve the beauty and emotion of your child's christening day.",
+  features: [
+    "Full ceremony coverage",
+    "1 photographer",
+    "200+ edited images",
+    "Online gallery for 12 months",
+    "Travel expenses included",
+  ],
+};
+
+const christeningGallery = [
+  "/images/portfolio/09-luxury-reception-setup.jpg",
+  "/images/portfolio/10-garden-dinner.jpg",
+  "/images/portfolio/02-greek-chapel.jpg",
+  "/images/portfolio/07-floral-centerpiece.jpg",
+];
+
+const christeningTestimonials: OfferTestimonial[] = [
+  {
+    quote:
+      "Lefteris captured every tender moment of our daughter's christening with such warmth and artistry. These photos are truly priceless.",
+    couple: "Maria & Giorgos",
+    location: "Athens, Greece",
+  },
+  {
+    quote:
+      "The images are stunning — every detail, every emotion, beautifully preserved. We couldn't be happier.",
+    couple: "Anna & Nikos",
+    location: "Thessaloniki, Greece",
+  },
+];
+
+function christeningIntroText(clientName: string): string {
+  return `Dear ${clientName},\n\nThank you so much for considering me to capture this beautiful milestone. It would be an honour to preserve the joy and emotion of your child's christening day.\n\nPlease review the details below. I'm always here to discuss any specifics or tailor the experience to your needs.`;
+}
+
+// ─── Shared logic ───
+
 const addonIdToField: Record<string, string> = {
   "extra-hour": "extraHour",
   photographer: "photographer",
@@ -118,40 +189,14 @@ interface SanityOffer {
   slug: { current: string };
   eventDate: string;
   eventLocation: string;
+  eventType: string;
+  christeningPrice?: number;
   packagePrices: { classic: number; refined: number; ultimate: number };
   addonPrices: Record<string, number>;
   isWeddingPlanner: boolean;
   isExpired: boolean;
   status: string;
 }
-
-function getIntroText(clientName: string): string {
-  return `Dear ${clientName},\n\nThank you so much for considering me to be part of your special day. It would be an absolute honour to capture your love story against the breathtaking backdrop of your celebration.\n\nPlease take your time reviewing the collections below. Each one has been thoughtfully designed to ensure your memories are preserved with the artistry and care they deserve. I'm always here to discuss any details or create something entirely bespoke for you.`;
-}
-
-const defaultGalleryImages = [
-  "/images/portfolio/11-ethereal-veil.jpg",
-  "/images/portfolio/04-bride-getting-ready.jpg",
-  "/images/portfolio/08-seaside-reception.jpg",
-  "/images/portfolio/05-bridal-veil-detail.jpg",
-  "/images/portfolio/09-luxury-reception-setup.jpg",
-  "/images/portfolio/10-garden-dinner.jpg",
-];
-
-const defaultTestimonials = [
-  {
-    quote:
-      "Lefteris didn't just photograph our wedding — he preserved the very feeling of it. Every image tells a story we get to relive again and again.",
-    couple: "Elena & Dimitris",
-    location: "Mykonos, Greece",
-  },
-  {
-    quote:
-      "Our photos are our most treasured possession. Pure art, captured with heart. We couldn't have dreamed of anything more beautiful.",
-    couple: "Sophie & James",
-    location: "Amalfi Coast, Italy",
-  },
-];
 
 export async function getOfferBySlug(
   slug: string
@@ -166,32 +211,49 @@ export async function getOfferBySlug(
     return null;
   }
 
-  const packages: OfferPackage[] = packageDefinitions.map((pkg) => ({
-    ...pkg,
-    price: sanityOffer.packagePrices?.[pkg.id as keyof typeof sanityOffer.packagePrices] ?? 0,
-  }));
+  const eventType = (sanityOffer.eventType || "wedding") as OfferData["eventType"];
+  const isChristening = eventType === "christening";
 
-  const addOns: OfferAddOn[] = addonDefinitions.map((addon) => {
-    const field = addonIdToField[addon.id];
-    const value = sanityOffer.addonPrices?.[field] ?? 0;
+  // Build packages
+  let packages: OfferPackage[];
+  if (isChristening) {
+    packages = [{ ...christeningPackage, price: sanityOffer.christeningPrice ?? 0 }];
+  } else {
+    packages = weddingPackages.map((pkg) => ({
+      ...pkg,
+      price: sanityOffer.packagePrices?.[pkg.id as keyof typeof sanityOffer.packagePrices] ?? 0,
+    }));
+  }
 
-    if (NDA_ADDON_IDS.has(addon.id)) {
-      return { ...addon, price: 0, percentageCost: value };
-    }
-    return { ...addon, price: value };
-  });
+  // Build addons (empty for christening)
+  let addOns: OfferAddOn[];
+  if (isChristening) {
+    addOns = [];
+  } else {
+    addOns = weddingAddons.map((addon) => {
+      const field = addonIdToField[addon.id];
+      const value = sanityOffer.addonPrices?.[field] ?? 0;
+      if (NDA_ADDON_IDS.has(addon.id)) {
+        return { ...addon, price: 0, percentageCost: value };
+      }
+      return { ...addon, price: value };
+    });
+  }
 
   return {
     id: sanityOffer.slug.current,
     clientName: sanityOffer.clientName,
     eventDate: sanityOffer.eventDate || "",
     eventLocation: sanityOffer.eventLocation || "",
-    introText: getIntroText(sanityOffer.clientName),
+    introText: isChristening
+      ? christeningIntroText(sanityOffer.clientName)
+      : weddingIntroText(sanityOffer.clientName),
     packages,
     addOns,
-    testimonials: defaultTestimonials,
-    galleryImages: defaultGalleryImages,
+    testimonials: isChristening ? christeningTestimonials : weddingTestimonials,
+    galleryImages: isChristening ? christeningGallery : weddingGallery,
     photographerName: "Lefteris",
+    eventType,
     status: sanityOffer.status as OfferData["status"] || "draft",
     isExpired: sanityOffer.isExpired ?? false,
     isWeddingPlanner: sanityOffer.isWeddingPlanner ?? false,

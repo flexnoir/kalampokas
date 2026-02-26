@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: OfferPageProps): Promise<Meta
 
   const offerUrl = `https://kalampokasfotografia.gr/offer/${id}`;
   return {
-    title: `${offer.eventType === "christening" ? "Christening" : "Wedding"} Photography Proposal for ${offer.clientName} | Kalampokas Fotografia`,
+    title: `${offer.eventType === "christening" ? "Christening" : offer.eventType === "event" ? "Event" : "Wedding"} Photography Proposal for ${offer.clientName} | Kalampokas Fotografia`,
     alternates: { canonical: offerUrl },
     openGraph: {
       url: offerUrl,

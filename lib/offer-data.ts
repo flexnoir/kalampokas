@@ -167,6 +167,48 @@ function christeningIntroText(clientName: string): string {
   return `Dear ${clientName},\n\nThank you so much for considering me to capture this beautiful milestone. It would be an honour to preserve the joy and emotion of your child's christening day.\n\nPlease review the details below. I'm always here to discuss any specifics or tailor the experience to your needs.`;
 }
 
+// ─── Event content ───
+
+const eventPackage: Omit<OfferPackage, "price"> = {
+  id: "event",
+  name: "Event Coverage",
+  description:
+    "A tailored photography experience designed to capture the atmosphere, moments, and details of your special occasion.",
+  features: [
+    "Full event coverage",
+    "1 photographer",
+    "200+ edited images",
+    "Online gallery for 12 months",
+    "Travel expenses included",
+  ],
+};
+
+const eventGallery = [
+  "/images/portfolio/09-luxury-reception-setup.jpg",
+  "/images/portfolio/10-garden-dinner.jpg",
+  "/images/portfolio/08-seaside-reception.jpg",
+  "/images/portfolio/07-floral-centerpiece.jpg",
+];
+
+const eventTestimonials: OfferTestimonial[] = [
+  {
+    quote:
+      "Lefteris has an incredible eye for capturing the energy and emotion of any occasion. Our photos are absolutely stunning.",
+    couple: "Christina & Alexandros",
+    location: "Athens, Greece",
+  },
+  {
+    quote:
+      "Every detail, every laugh, every special moment — beautifully documented. We couldn't be more grateful.",
+    couple: "Katerina & Panagiotis",
+    location: "Nafplio, Greece",
+  },
+];
+
+function eventIntroText(clientName: string): string {
+  return `Dear ${clientName},\n\nThank you so much for considering me to photograph your event. It would be an honour to capture the atmosphere and special moments of your celebration.\n\nPlease review the details below. I'm always here to discuss any specifics or tailor the experience to your needs.`;
+}
+
 // ─── Shared logic ───
 
 const addonIdToField: Record<string, string> = {
@@ -191,6 +233,7 @@ interface SanityOffer {
   eventLocation: string;
   eventType: string;
   christeningPrice?: number;
+  eventPrice?: number;
   packagePrices: { classic: number; refined: number; ultimate: number };
   addonPrices: Record<string, number>;
   isWeddingPlanner: boolean;
@@ -212,32 +255,46 @@ export async function getOfferBySlug(
   }
 
   const eventType = (sanityOffer.eventType || "wedding") as OfferData["eventType"];
-  const isChristening = eventType === "christening";
 
   // Build packages
   let packages: OfferPackage[];
-  if (isChristening) {
-    packages = [{ ...christeningPackage, price: sanityOffer.christeningPrice ?? 0 }];
-  } else {
-    packages = weddingPackages.map((pkg) => ({
-      ...pkg,
-      price: sanityOffer.packagePrices?.[pkg.id as keyof typeof sanityOffer.packagePrices] ?? 0,
-    }));
-  }
-
-  // Build addons (empty for christening)
   let addOns: OfferAddOn[];
-  if (isChristening) {
-    addOns = [];
-  } else {
-    addOns = weddingAddons.map((addon) => {
-      const field = addonIdToField[addon.id];
-      const value = sanityOffer.addonPrices?.[field] ?? 0;
-      if (NDA_ADDON_IDS.has(addon.id)) {
-        return { ...addon, price: 0, percentageCost: value };
-      }
-      return { ...addon, price: value };
-    });
+  let introText: string;
+  let testimonials: OfferTestimonial[];
+  let galleryImages: string[];
+
+  switch (eventType) {
+    case "christening":
+      packages = [{ ...christeningPackage, price: sanityOffer.christeningPrice ?? 0 }];
+      addOns = [];
+      introText = christeningIntroText(sanityOffer.clientName);
+      testimonials = christeningTestimonials;
+      galleryImages = christeningGallery;
+      break;
+    case "event":
+      packages = [{ ...eventPackage, price: sanityOffer.eventPrice ?? 0 }];
+      addOns = [];
+      introText = eventIntroText(sanityOffer.clientName);
+      testimonials = eventTestimonials;
+      galleryImages = eventGallery;
+      break;
+    default: // wedding
+      packages = weddingPackages.map((pkg) => ({
+        ...pkg,
+        price: sanityOffer.packagePrices?.[pkg.id as keyof typeof sanityOffer.packagePrices] ?? 0,
+      }));
+      addOns = weddingAddons.map((addon) => {
+        const field = addonIdToField[addon.id];
+        const value = sanityOffer.addonPrices?.[field] ?? 0;
+        if (NDA_ADDON_IDS.has(addon.id)) {
+          return { ...addon, price: 0, percentageCost: value };
+        }
+        return { ...addon, price: value };
+      });
+      introText = weddingIntroText(sanityOffer.clientName);
+      testimonials = weddingTestimonials;
+      galleryImages = weddingGallery;
+      break;
   }
 
   return {
@@ -245,13 +302,11 @@ export async function getOfferBySlug(
     clientName: sanityOffer.clientName,
     eventDate: sanityOffer.eventDate || "",
     eventLocation: sanityOffer.eventLocation || "",
-    introText: isChristening
-      ? christeningIntroText(sanityOffer.clientName)
-      : weddingIntroText(sanityOffer.clientName),
+    introText,
     packages,
     addOns,
-    testimonials: isChristening ? christeningTestimonials : weddingTestimonials,
-    galleryImages: isChristening ? christeningGallery : weddingGallery,
+    testimonials,
+    galleryImages,
     photographerName: "Lefteris",
     eventType,
     status: sanityOffer.status as OfferData["status"] || "draft",

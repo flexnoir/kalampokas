@@ -13,6 +13,7 @@ export const offer = defineType({
         list: [
           { title: "Wedding", value: "wedding" },
           { title: "Christening", value: "christening" },
+          { title: "Event", value: "event" },
         ],
         layout: "radio",
       },
@@ -65,10 +66,17 @@ export const offer = defineType({
       hidden: ({ parent }) => parent?.eventType !== "christening",
     }),
     defineField({
+      name: "eventPrice",
+      title: "Event Price",
+      type: "number",
+      validation: (rule) => rule.min(0),
+      hidden: ({ parent }) => parent?.eventType !== "event",
+    }),
+    defineField({
       name: "packagePrices",
       title: "Package Prices",
       type: "object",
-      hidden: ({ parent }) => parent?.eventType === "christening",
+      hidden: ({ parent }) => parent?.eventType === "christening" || parent?.eventType === "event",
       fields: [
         defineField({
           name: "classic",
@@ -94,7 +102,7 @@ export const offer = defineType({
       name: "addonPrices",
       title: "Add-on Prices",
       type: "object",
-      hidden: ({ parent }) => parent?.eventType === "christening",
+      hidden: ({ parent }) => parent?.eventType === "christening" || parent?.eventType === "event",
       fields: [
         defineField({
           name: "extraHour",
@@ -202,7 +210,8 @@ export const offer = defineType({
       eventType: "eventType",
     },
     prepare({ title, subtitle, status, eventType }) {
-      const type = eventType === "christening" ? "Christening" : "Wedding";
+      const typeLabels: Record<string, string> = { wedding: "Wedding", christening: "Christening", event: "Event" };
+      const type = typeLabels[eventType] || "Wedding";
       return {
         title: title || "Untitled Offer",
         subtitle: `${type} — ${subtitle || "No date"} — ${status || "draft"}`,

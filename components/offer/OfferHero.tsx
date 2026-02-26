@@ -8,7 +8,7 @@ interface OfferHeroProps {
   clientName: string;
   eventDate: string;
   eventLocation: string;
-  eventType: "wedding" | "christening";
+  eventType: "wedding" | "christening" | "event";
 }
 
 export default function OfferHero({ clientName, eventDate, eventLocation, eventType }: OfferHeroProps) {
@@ -56,7 +56,11 @@ export default function OfferHero({ clientName, eventDate, eventLocation, eventT
           transition={{ duration: 1.2, delay: 0.3 }}
           className="text-soft-white/50 text-[10px] sm:text-[11px] uppercase tracking-[0.5em] font-sans font-light"
         >
-          {eventType === "christening" ? "Christening Photography Proposal" : "Wedding Photography Proposal"}
+          {eventType === "christening"
+            ? "Christening Photography Proposal"
+            : eventType === "event"
+              ? "Event Photography Proposal"
+              : "Wedding Photography Proposal"}
         </motion.span>
 
         <motion.div

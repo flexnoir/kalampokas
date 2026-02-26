@@ -14,8 +14,13 @@ export async function generateMetadata({ params }: OfferPageProps): Promise<Meta
   const noIndex = { robots: { index: false, follow: false } };
   if (!offer) return { title: "Offer Not Found", ...noIndex };
 
+  const offerUrl = `https://kalampokasfotografia.gr/offer/${id}`;
   return {
     title: `${offer.eventType === "christening" ? "Christening" : "Wedding"} Photography Proposal for ${offer.clientName} | Kalampokas Fotografia`,
+    alternates: { canonical: offerUrl },
+    openGraph: {
+      url: offerUrl,
+    },
     ...noIndex,
   };
 }

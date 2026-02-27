@@ -23,13 +23,19 @@ export default function About() {
   Greece gave me the light. Twelve years and three hundred weddings later, I still chase it.
 </p>
 <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-  I work across Europe — Mykonos, Santorini, Tuscany, Amalfi — for couples who want photographs that feel like cinema, not catalogues. No forced poses. No predictable moments. Just the real story, shot with intention.
+  I work across Europe — Athens, Mykonos, Santorini, Tuscany and the Amalfi Coast — for couples who want photographs that feel like cinema, not catalogues. No forced poses. No predictable moments. Just the real story, shot with intention.
 </p>
 
 <div className="mt-8 w-8 h-px bg-gold/40" />
 
-<p className="mt-6 text-warm-gray/60 text-[13px] leading-relaxed font-sans font-light italic">
-  Off-season: Cycladic light, strong coffee, and the company of my wife and our dog.
+<p className="mt-6 text-warm-gray text-[13px] leading-relaxed font-sans font-light">
+  Featured in leading international publications including{" "}
+  <span className="italic font-normal">Vogue</span>,{" "}
+  <span className="italic font-normal">Style Me Pretty</span> and{" "}
+  <span className="italic font-normal">Magnolia Rouge</span>.
+</p>
+<p className="mt-5 text-warm-gray/60 text-[13px] leading-relaxed font-sans font-light italic">
+  Off-season: Cycladic light, strong coffee, and time with my wife and our dog.
 </p>
 <p className="mt-3 text-warm-gray text-[13px] leading-relaxed font-sans font-light tracking-widest uppercase">
   Based in Greece. Available worldwide.

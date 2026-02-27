@@ -18,10 +18,10 @@ const pressFeatures = [
     publication: "Amber & Muse",
   },
   {
-    title: "A Vintage Wedding for Angeliki and Kyriakos",
-    coverImage: "/images/press-3.webp",
-    url: "https://caratsandcake.com/wedding/angeliki-and-kyriakos",
-    publication: "Carats & Cake",
+    title: "Vogue Wedding in Greece",
+    coverImage: "/images/press-4.jpg",
+    url: "https://amberandmuse.com/vogue-wedding-in-greece/",
+    publication: "Amber & Muse",
   },
 ];
 

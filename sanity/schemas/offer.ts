@@ -106,19 +106,19 @@ export const offer = defineType({
       fields: [
         defineField({
           name: "classic",
-          title: "Classic Elegance",
+          title: "The Signature Day",
           type: "number",
           validation: (rule) => rule.required().min(0),
         }),
         defineField({
           name: "refined",
-          title: "Refined & Elevated",
+          title: "The Complete Story",
           type: "number",
           validation: (rule) => rule.required().min(0),
         }),
         defineField({
           name: "ultimate",
-          title: "Ultimate Luxury",
+          title: "The Editorial Weekend",
           type: "number",
           validation: (rule) => rule.required().min(0),
         }),

@@ -175,13 +175,33 @@ const eventPackage: Omit<OfferPackage, "price"> = {
   description:
     "A tailored photography experience designed to capture the atmosphere, moments, and details of your special occasion.",
   features: [
-    "Full event coverage",
-    "1 photographer",
-    "200+ edited images",
-    "Online gallery for 12 months",
-    "Travel expenses included",
+    "Up to 8 consecutive hours",
+    "2 photographers",
+    "Comprehensive documentary coverage of the event",
+    "Refined editorial coverage of all guests throughout the evening",
+    "Atmosphere, styling and defining moments",
+    "Carefully edited high resolution images",
+    "Private online gallery for viewing and download",
   ],
 };
+
+const eventAddons: Omit<OfferAddOn, "price">[] = [
+  {
+    id: "event-extra-hour",
+    name: "Additional Hour",
+    description: "Extended shooting time beyond the included 8 hours",
+  },
+  {
+    id: "event-third-photographer",
+    name: "Third Photographer",
+    description: "An additional photographer for wider coverage",
+  },
+  {
+    id: "event-express-delivery",
+    name: "Express Delivery",
+    description: "Receive your edited gallery within 5 working days",
+  },
+];
 
 const eventGallery = [
   "/images/portfolio/09-luxury-reception-setup.jpg",
@@ -234,6 +254,7 @@ interface SanityOffer {
   eventType: string;
   christeningPrice?: number;
   eventPrice?: number;
+  eventAddonPrices?: { extraHour?: number; thirdPhotographer?: number; expressDelivery?: number };
   packagePrices: { classic: number; refined: number; ultimate: number };
   addonPrices: Record<string, number>;
   isWeddingPlanner: boolean;
@@ -271,13 +292,23 @@ export async function getOfferBySlug(
       testimonials = christeningTestimonials;
       galleryImages = christeningGallery;
       break;
-    case "event":
+    case "event": {
       packages = [{ ...eventPackage, price: sanityOffer.eventPrice ?? 0 }];
-      addOns = [];
+      const eap = sanityOffer.eventAddonPrices ?? {};
+      const eventAddonIdToField: Record<string, keyof typeof eap> = {
+        "event-extra-hour": "extraHour",
+        "event-third-photographer": "thirdPhotographer",
+        "event-express-delivery": "expressDelivery",
+      };
+      addOns = eventAddons.map((addon) => ({
+        ...addon,
+        price: eap[eventAddonIdToField[addon.id]] ?? 0,
+      }));
       introText = eventIntroText(sanityOffer.clientName);
       testimonials = eventTestimonials;
       galleryImages = eventGallery;
       break;
+    }
     default: // wedding
       packages = weddingPackages.map((pkg) => ({
         ...pkg,

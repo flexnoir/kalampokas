@@ -26,6 +26,7 @@ export const offerBySlugQuery = `*[_type == "offer" && slug.current == $slug][0]
   eventType,
   christeningPrice,
   eventPrice,
+  eventAddonPrices,
   packagePrices,
   addonPrices,
   isWeddingPlanner,

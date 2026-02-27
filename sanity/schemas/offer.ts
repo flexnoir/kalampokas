@@ -73,6 +73,32 @@ export const offer = defineType({
       hidden: ({ parent }) => parent?.eventType !== "event",
     }),
     defineField({
+      name: "eventAddonPrices",
+      title: "Event Add-on Prices",
+      type: "object",
+      hidden: ({ parent }) => parent?.eventType !== "event",
+      fields: [
+        defineField({
+          name: "extraHour",
+          title: "Additional Hour",
+          type: "number",
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
+          name: "thirdPhotographer",
+          title: "Third Photographer",
+          type: "number",
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
+          name: "expressDelivery",
+          title: "Express Delivery (5 days)",
+          type: "number",
+          validation: (rule) => rule.min(0),
+        }),
+      ],
+    }),
+    defineField({
       name: "packagePrices",
       title: "Package Prices",
       type: "object",
@@ -200,6 +226,11 @@ export const offer = defineType({
       parentAlbums: 400,
       fullNda: 20,
       partialNda: 10,
+    },
+    eventAddonPrices: {
+      extraHour: 250,
+      thirdPhotographer: 550,
+      expressDelivery: 500,
     },
   }),
   preview: {

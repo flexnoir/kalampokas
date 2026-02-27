@@ -82,9 +82,16 @@ export default function Press() {
                       {entry.publication}
                     </span>
 
-                    <h3 className="mt-5 text-2xl md:text-3xl lg:text-[2.5rem] font-serif font-light text-soft-white/85 leading-[1.3] max-w-md italic">
-                      {entry.title}
-                    </h3>
+                    <a
+                      href={entry.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-5 hover:text-gold/70 transition-colors duration-500"
+                    >
+                      <h3 className="text-2xl md:text-3xl lg:text-[2.5rem] font-serif font-light text-soft-white/85 leading-[1.3] max-w-md italic">
+                        {entry.title}
+                      </h3>
+                    </a>
 
                     <a
                       href={entry.url}

@@ -99,7 +99,7 @@ const weddingAddons: Omit<OfferAddOn, "price" | "percentageCost">[] = [
 ];
 
 const weddingGallery = [
-  "/images/wedding/01-couple-kiss.jpg",
+  "/images/portfolio/05-bridal-veil-detail.jpg",
   "/images/wedding/02-table-detail.jpg",
   "/images/wedding/03-venue-window.jpg",
   "/images/wedding/04-couple-walk.jpg",

@@ -10,7 +10,7 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
         <AnimateOnScroll>
           <ParallaxImage
-            src="/images/about-v2.jpg"
+            src="/images/about-v3.jpg"
             alt="Lefteris Kalampokas"
             aspect="4/5"
             sizes="(max-width: 768px) 100vw, 50vw"

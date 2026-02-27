@@ -222,8 +222,8 @@ const eventTestimonials: OfferTestimonial[] = [
   {
     quote:
       "Every detail, every laugh, every special moment — beautifully documented. We couldn't be more grateful.",
-    couple: "Katerina & Panagiotis",
-    location: "Nafplio, Greece",
+    couple: "Elizabeth & Christopher",
+    location: "Mykonos, Greece",
   },
 ];
 

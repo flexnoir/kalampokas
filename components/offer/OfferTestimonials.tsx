@@ -12,7 +12,7 @@ export default function OfferTestimonials({ testimonials }: OfferTestimonialsPro
   return (
     <section className="py-16 md:py-32 bg-soft-white">
       <div className="max-w-5xl mx-auto px-6 lg:px-16">
-        <SectionTitle label="Kind Words" title="From Past Clients" />
+        <SectionTitle label="The experience is best described" title="by those who have lived it" />
 
         <div className={`grid grid-cols-1 ${testimonials.length > 1 ? "md:grid-cols-2" : ""} gap-12 md:gap-16`}>
           {testimonials.map((t, i) => (

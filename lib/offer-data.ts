@@ -204,10 +204,12 @@ const eventAddons: Omit<OfferAddOn, "price">[] = [
 ];
 
 const eventGallery = [
-  "/images/portfolio/09-luxury-reception-setup.jpg",
-  "/images/portfolio/10-garden-dinner.jpg",
-  "/images/portfolio/08-seaside-reception.jpg",
-  "/images/portfolio/07-floral-centerpiece.jpg",
+  "/images/events/01-underworld-setup.jpg",
+  "/images/events/02-versailles-crowd.jpg",
+  "/images/events/03-havana-dancers.jpg",
+  "/images/events/04-evalend-bar.jpg",
+  "/images/events/05-havana-portrait.jpg",
+  "/images/events/06-versailles-masquerade.jpg",
 ];
 
 const eventTestimonials: OfferTestimonial[] = [

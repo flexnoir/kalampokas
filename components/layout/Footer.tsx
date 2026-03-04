@@ -8,7 +8,12 @@ export default function Footer() {
             Kalampokas Fotografia
           </span>
           <p className="mt-3 text-soft-white/30 text-[12px] font-sans font-light tracking-wider">
-            Greece Worldwide
+            Featured in leading international publications including
+            <span className="mt-1 block">
+              <span className="italic font-normal">Vogue</span>,{" "}
+              <span className="italic font-normal">Style Me Pretty</span> and{" "}
+              <span className="italic font-normal">Magnolia Rouge</span>.
+            </span>
           </p>
         </div>
 

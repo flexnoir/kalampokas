@@ -11,6 +11,7 @@ interface OfferAddOnsProps {
   addOnQuantities: Record<string, number>;
   onIncrementAddOnQuantity: (id: string) => void;
   onDecrementAddOnQuantity: (id: string) => void;
+  showSelectPackageMessage: boolean;
 }
 
 function formatPrice(price: number): string {
@@ -29,11 +30,21 @@ export default function OfferAddOns({
   addOnQuantities,
   onIncrementAddOnQuantity,
   onDecrementAddOnQuantity,
+  showSelectPackageMessage,
 }: OfferAddOnsProps) {
   return (
     <section className="py-16 md:py-32">
       <div className="max-w-4xl mx-auto px-6 lg:px-16">
         <SectionTitle label="Enhance Your Experience" title="Additional Options" />
+        {showSelectPackageMessage && (
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 text-[12px] font-sans font-light tracking-wide text-warm-gray/75"
+          >
+            Please select a package first.
+          </motion.p>
+        )}
 
         <div className="space-y-4">
           {addOns.map((addon, i) => {

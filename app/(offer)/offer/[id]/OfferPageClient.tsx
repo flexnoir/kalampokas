@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { OfferData } from "@/types";
 import OfferHero from "@/components/offer/OfferHero";
@@ -25,6 +25,8 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
   const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
   const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>([]);
   const [addOnQuantities, setAddOnQuantities] = useState<Record<string, number>>({});
+  const [showSelectPackageMessage, setShowSelectPackageMessage] = useState(false);
+  const selectPackageMessageTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const selectedPackage = offer.packages.find((p) => p.id === selectedPackageId) ?? null;
   const selectedAddOns = offer.addOns.filter((a) => selectedAddOnIds.includes(a.id));
@@ -45,6 +47,17 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
   const ndaIds = ["full-nda", "partial-nda"];
 
   const toggleAddOn = (id: string) => {
+    if (!selectedPackage) {
+      setShowSelectPackageMessage(true);
+      if (selectPackageMessageTimeoutRef.current) {
+        clearTimeout(selectPackageMessageTimeoutRef.current);
+      }
+      selectPackageMessageTimeoutRef.current = setTimeout(() => {
+        setShowSelectPackageMessage(false);
+      }, 5000);
+      return;
+    }
+
     setSelectedAddOnIds((prev) => {
       if (prev.includes(id)) {
         setAddOnQuantities((current) => {
@@ -65,6 +78,14 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
       return [...prev, id];
     });
   };
+
+  useEffect(() => {
+    return () => {
+      if (selectPackageMessageTimeoutRef.current) {
+        clearTimeout(selectPackageMessageTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const incrementAddOnQuantity = (id: string) => {
     setAddOnQuantities((current) => ({
@@ -105,6 +126,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
           addOnQuantities={addOnQuantities}
           onIncrementAddOnQuantity={incrementAddOnQuantity}
           onDecrementAddOnQuantity={decrementAddOnQuantity}
+          showSelectPackageMessage={showSelectPackageMessage}
         />
       )}
       <OfferTestimonials testimonials={offer.testimonials} />

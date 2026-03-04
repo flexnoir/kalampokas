@@ -8,7 +8,7 @@ export default function Footer() {
             Kalampokas Fotografia
           </span>
           <p className="mt-3 text-soft-white/30 text-[12px] font-sans font-light tracking-wider">
-            Greece &middot; Worldwide
+            Greece Worldwide
           </p>
         </div>
 
@@ -37,6 +37,9 @@ export default function Footer() {
         {/* Email */}
         <p className="mt-4 text-center text-[11px] tracking-[0.15em] text-soft-white/25 font-sans font-light">
           info@kalampokasfotografia.gr
+        </p>
+        <p className="mt-2 text-center text-[11px] tracking-[0.15em] text-soft-white/25 font-sans font-light">
+          +30 6979101026
         </p>
 
         {/* Copyright */}

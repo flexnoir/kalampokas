@@ -55,7 +55,11 @@ export default function Contact() {
 
         <AnimateOnScroll>
           <p className="text-center text-warm-gray/60 text-[13px] font-sans font-light tracking-wider uppercase mb-10 md:mb-14">
-            Currently booking 2026-2027 &middot; Limited availability
+            <span className="block">Currently booking 2026 2027</span>
+            <span className="mt-1 block max-w-[34ch] mx-auto normal-case tracking-normal text-warm-gray/50 leading-relaxed">
+              A limited number of celebrations are accepted each year. I will
+              personaly respond within 24 hours.
+            </span>
           </p>
         </AnimateOnScroll>
 
@@ -121,7 +125,7 @@ export default function Contact() {
                 <textarea
                   {...register("message")}
                   rows={3}
-                  placeholder="Tell me about your day..."
+                  placeholder="Share anything you'd love me to know..."
                   className={`${inputClasses} resize-none`}
                 />
                 {errors.message && (

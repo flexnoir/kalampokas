@@ -65,7 +65,7 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 3.1, ease: "easeOut" }}
           className="mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-soft-white tracking-wide leading-[1.2]"
         >
-          Timeless Moments,
+          Timeless Moments.
           <br />
           <span className="italic">Artfully Captured</span>
         </motion.h1>
@@ -76,7 +76,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 3.6 }}
           className="mt-5 text-soft-white/40 text-[12px] sm:text-[13px] font-sans font-light tracking-[0.15em]"
         >
-          Greece &middot; Worldwide
+          Greece Worldwide
         </motion.p>
 
         <motion.a

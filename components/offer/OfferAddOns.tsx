@@ -8,21 +8,27 @@ interface OfferAddOnsProps {
   addOns: OfferAddOn[];
   selectedAddOnIds: string[];
   onToggleAddOn: (id: string) => void;
+  addOnQuantities: Record<string, number>;
+  onIncrementAddOnQuantity: (id: string) => void;
+  onDecrementAddOnQuantity: (id: string) => void;
 }
 
 function formatPrice(price: number): string {
-  return new Intl.NumberFormat("en-DE", {
-    style: "currency",
-    currency: "EUR",
+  const formattedValue = new Intl.NumberFormat("de-DE", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
+
+  return `${formattedValue} €`;
 }
 
 export default function OfferAddOns({
   addOns,
   selectedAddOnIds,
   onToggleAddOn,
+  addOnQuantities,
+  onIncrementAddOnQuantity,
+  onDecrementAddOnQuantity,
 }: OfferAddOnsProps) {
   return (
     <section className="py-16 md:py-32">
@@ -32,6 +38,7 @@ export default function OfferAddOns({
         <div className="space-y-4">
           {addOns.map((addon, i) => {
             const isSelected = selectedAddOnIds.includes(addon.id);
+            const quantity = addOnQuantities[addon.id] ?? 1;
 
             return (
               <motion.button
@@ -79,11 +86,42 @@ export default function OfferAddOns({
                 </div>
 
                 {/* Price */}
-                <span className="shrink-0 font-serif text-lg font-light text-charcoal">
-                  {addon.percentageCost
-                    ? `+${addon.percentageCost}%`
-                    : `+${formatPrice(addon.price)}`}
-                </span>
+                <div className="shrink-0 flex items-center gap-3">
+                  {isSelected && addon.supportsQuantity && (
+                    <div className="flex items-center border border-warm-gray/25">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onDecrementAddOnQuantity(addon.id);
+                        }}
+                        className="w-8 h-8 text-charcoal/70 hover:bg-warm-gray/10 transition-colors"
+                        aria-label={`Decrease ${addon.name} quantity`}
+                      >
+                        -
+                      </button>
+                      <span className="w-8 text-center text-[13px] font-sans text-charcoal">
+                        {quantity}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onIncrementAddOnQuantity(addon.id);
+                        }}
+                        className="w-8 h-8 text-charcoal/70 hover:bg-warm-gray/10 transition-colors"
+                        aria-label={`Increase ${addon.name} quantity`}
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
+                  <span className="font-serif text-lg font-light text-charcoal">
+                    {addon.percentageCost
+                      ? `+${addon.percentageCost}%`
+                      : `+${formatPrice(addon.price)}`}
+                  </span>
+                </div>
               </motion.button>
             );
           })}

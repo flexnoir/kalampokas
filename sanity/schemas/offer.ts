@@ -86,7 +86,7 @@ export const offer = defineType({
         }),
         defineField({
           name: "thirdPhotographer",
-          title: "Third Photographer",
+          title: "Additional Photographer",
           type: "number",
           validation: (rule) => rule.min(0),
         }),

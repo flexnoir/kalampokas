@@ -10,16 +10,17 @@ interface OfferResponseProps {
   isAccepted: boolean;
   selectedPackage: OfferPackage | null;
   selectedAddOns: OfferAddOn[];
+  addOnQuantities: Record<string, number>;
   totalPrice: number;
 }
 
 function formatPrice(price: number): string {
-  return new Intl.NumberFormat("en-DE", {
-    style: "currency",
-    currency: "EUR",
+  const formattedValue = new Intl.NumberFormat("de-DE", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
+
+  return `${formattedValue} €`;
 }
 
 export default function OfferResponse({
@@ -27,6 +28,7 @@ export default function OfferResponse({
   isAccepted,
   selectedPackage,
   selectedAddOns,
+  addOnQuantities,
   totalPrice,
 }: OfferResponseProps) {
   const [message, setMessage] = useState("");
@@ -110,11 +112,12 @@ export default function OfferResponse({
                     <div key={addon.id} className="flex items-center justify-between">
                       <span className="text-[13px] font-sans font-light text-charcoal/70">
                         {addon.name}
+                        {addon.supportsQuantity ? ` x${Math.max(1, addOnQuantities[addon.id] ?? 1)}` : ""}
                       </span>
                       <span className="text-[13px] font-sans font-light text-charcoal/70">
                         {addon.percentageCost
                           ? `+${addon.percentageCost}% (${formatPrice(Math.round(selectedPackage.price * (addon.percentageCost / 100)))})`
-                          : `+${formatPrice(addon.price)}`}
+                          : `+${formatPrice(addon.price * (addon.supportsQuantity ? Math.max(1, addOnQuantities[addon.id] ?? 1) : 1))}`}
                       </span>
                     </div>
                   ))}

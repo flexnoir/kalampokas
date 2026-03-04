@@ -13,40 +13,71 @@ import OfferResponse from "@/components/offer/OfferResponse";
 import OfferFooter from "@/components/offer/OfferFooter";
 
 function formatPrice(price: number): string {
-  return new Intl.NumberFormat("en-DE", {
-    style: "currency",
-    currency: "EUR",
+  const formattedValue = new Intl.NumberFormat("de-DE", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
+
+  return `${formattedValue} €`;
 }
 
 export default function OfferPageClient({ offer }: { offer: OfferData }) {
   const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
   const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>([]);
+  const [addOnQuantities, setAddOnQuantities] = useState<Record<string, number>>({});
 
   const selectedPackage = offer.packages.find((p) => p.id === selectedPackageId) ?? null;
   const selectedAddOns = offer.addOns.filter((a) => selectedAddOnIds.includes(a.id));
   const packagePrice = selectedPackage?.price ?? 0;
+  const getAddOnQuantity = (id: string) => Math.max(1, addOnQuantities[id] ?? 1);
   const addOnsFixedTotal = selectedAddOns
     .filter((a) => !a.percentageCost)
-    .reduce((sum, a) => sum + a.price, 0);
+    .reduce((sum, a) => sum + a.price * getAddOnQuantity(a.id), 0);
   const addOnsPercentageTotal = selectedAddOns
     .filter((a) => a.percentageCost)
     .reduce((sum, a) => Math.round(packagePrice * (a.percentageCost! / 100)) + sum, 0);
   const totalPrice = packagePrice + addOnsFixedTotal + addOnsPercentageTotal;
+  const totalAddOnUnits = selectedAddOns.reduce(
+    (sum, addon) => sum + (addon.supportsQuantity ? getAddOnQuantity(addon.id) : 1),
+    0
+  );
 
   const ndaIds = ["full-nda", "partial-nda"];
 
   const toggleAddOn = (id: string) => {
     setSelectedAddOnIds((prev) => {
-      if (prev.includes(id)) return prev.filter((x) => x !== id);
+      if (prev.includes(id)) {
+        setAddOnQuantities((current) => {
+          const next = { ...current };
+          delete next[id];
+          return next;
+        });
+        return prev.filter((x) => x !== id);
+      }
       // NDA options are mutually exclusive
       if (ndaIds.includes(id)) {
         return [...prev.filter((x) => !ndaIds.includes(x)), id];
       }
+      setAddOnQuantities((current) => ({
+        ...current,
+        [id]: Math.max(1, current[id] ?? 1),
+      }));
       return [...prev, id];
     });
+  };
+
+  const incrementAddOnQuantity = (id: string) => {
+    setAddOnQuantities((current) => ({
+      ...current,
+      [id]: Math.max(1, (current[id] ?? 1) + 1),
+    }));
+  };
+
+  const decrementAddOnQuantity = (id: string) => {
+    setAddOnQuantities((current) => ({
+      ...current,
+      [id]: Math.max(1, (current[id] ?? 1) - 1),
+    }));
   };
 
   return (
@@ -71,6 +102,9 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
           addOns={offer.addOns}
           selectedAddOnIds={selectedAddOnIds}
           onToggleAddOn={toggleAddOn}
+          addOnQuantities={addOnQuantities}
+          onIncrementAddOnQuantity={incrementAddOnQuantity}
+          onDecrementAddOnQuantity={decrementAddOnQuantity}
         />
       )}
       <OfferTestimonials testimonials={offer.testimonials} />
@@ -81,6 +115,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
           isAccepted={offer.status === "accepted"}
           selectedPackage={selectedPackage}
           selectedAddOns={selectedAddOns}
+          addOnQuantities={addOnQuantities}
           totalPrice={totalPrice}
         />
       )}
@@ -103,7 +138,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
                 </span>
                 {selectedAddOns.length > 0 && (
                   <span className="text-[11px] text-soft-white/40 font-sans font-light">
-                    + {selectedAddOns.length} extra{selectedAddOns.length > 1 ? "s" : ""}
+                    + {totalAddOnUnits} extra{totalAddOnUnits > 1 ? "s" : ""}
                   </span>
                 )}
               </div>

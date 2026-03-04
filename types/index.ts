@@ -32,6 +32,7 @@ export interface OfferAddOn {
   description: string;
   price: number;
   percentageCost?: number; // percentage of selected package price (e.g. 20 = +20%)
+  supportsQuantity?: boolean;
 }
 
 export interface OfferTestimonial {

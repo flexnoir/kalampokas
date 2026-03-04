@@ -11,12 +11,12 @@ interface OfferPackagesProps {
 }
 
 function formatPrice(price: number): string {
-  return new Intl.NumberFormat("en-DE", {
-    style: "currency",
-    currency: "EUR",
+  const formattedValue = new Intl.NumberFormat("de-DE", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
+
+  return `${formattedValue} €`;
 }
 
 export default function OfferPackages({

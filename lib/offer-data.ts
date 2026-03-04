@@ -194,8 +194,9 @@ const eventAddons: Omit<OfferAddOn, "price">[] = [
   },
   {
     id: "event-third-photographer",
-    name: "Third Photographer",
+    name: "Additional Photographer",
     description: "An additional photographer for wider coverage",
+    supportsQuantity: true,
   },
   {
     id: "event-express-delivery",

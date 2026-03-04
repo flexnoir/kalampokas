@@ -19,7 +19,7 @@ function formatPrice(price: number): string {
     maximumFractionDigits: 0,
   }).format(price);
 
-  return `${formattedValue} €`;
+  return `€ ${formattedValue}`;
 }
 
 export default function OfferAddOns({

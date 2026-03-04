@@ -11,8 +11,8 @@ const contactSchema = z.object({
   name: z.string().min(2, "Please enter your name"),
   email: z.string().email("Please enter a valid email"),
   date: z.string().min(1, "Please select a date"),
-  venue: z.string().min(2, "Please enter your venue or destination"),
-  message: z.string().min(10, "Please tell us a bit more about your day"),
+  venue: z.string().optional(),
+  message: z.string().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -98,10 +98,8 @@ export default function Contact() {
                 <div>
                   <input
                     {...register("date")}
-                    type="text"
-                    placeholder="Wedding Date"
-                    onFocus={(e) => (e.target.type = "date")}
-                    onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
+                    type="date"
+                    aria-label="Wedding Date"
                     className={inputClasses}
                   />
                   {errors.date && (

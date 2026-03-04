@@ -6,8 +6,8 @@ const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   date: z.string().min(1),
-  venue: z.string().min(2),
-  message: z.string().min(10),
+  venue: z.string().optional(),
+  message: z.string().optional(),
 });
 
 export async function POST(request: Request) {
@@ -26,9 +26,9 @@ export async function POST(request: Request) {
         <p><strong>Name:</strong> ${data.name}</p>
         <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>Date:</strong> ${data.date}</p>
-        <p><strong>Venue:</strong> ${data.venue}</p>
+        <p><strong>Venue:</strong> ${data.venue || "-"}</p>
         <p><strong>Message:</strong></p>
-        <p>${data.message}</p>
+        <p>${data.message || "-"}</p>
       `,
       replyTo: data.email,
     });

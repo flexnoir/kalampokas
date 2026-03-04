@@ -12,8 +12,8 @@ export interface ContactFormData {
   name: string;
   email: string;
   date: string;
-  venue: string;
-  message: string;
+  venue?: string;
+  message?: string;
 }
 
 // Offer types

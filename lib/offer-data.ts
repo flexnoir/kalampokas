@@ -134,11 +134,14 @@ const christeningPackage: Omit<OfferPackage, "price"> = {
   description:
     "A thoughtful photography experience designed to preserve the beauty and emotion of your child's christening day.",
   features: [
-    "Full ceremony coverage",
-    "1 photographer",
-    "200+ edited images",
-    "Online gallery for 12 months",
-    "Travel expenses included",
+    "One Photographer — Lefteris Kalampokas",
+    "Full-day coverage, up to 10 consecutive hours",
+    "Drone coverage, weather and legal conditions permitting",
+    "Carefully curated high-resolution image collection",
+    "Private online gallery for viewing and download",
+    "Preview selection delivered within the first week",
+    "Full gallery delivered within approximately six weeks"
+
   ],
 };
 
@@ -147,6 +150,8 @@ const christeningGallery = [
   "/images/portfolio/10-garden-dinner.jpg",
   "/images/portfolio/02-greek-chapel.jpg",
   "/images/portfolio/07-floral-centerpiece.jpg",
+  "/images/portfolio/08-seaside-reception.jpg",
+  "/images/wedding/05-aerial-view.jpg",
 ];
 
 const christeningTestimonials: OfferTestimonial[] = [

@@ -135,7 +135,7 @@ const christeningPackage: Omit<OfferPackage, "price"> = {
     "A thoughtful photography experience designed to preserve the beauty and emotion of your child's christening day.",
   features: [
     "One Photographer — Lefteris Kalampokas",
-    "Full-day coverage, up to 10 consecutive hours",
+    "Full-day coverage, up to 6 consecutive hours",
     "Drone coverage, weather and legal conditions permitting",
     "Carefully curated high-resolution image collection",
     "Private online gallery for viewing and download",

@@ -111,7 +111,7 @@ const weddingTestimonials: OfferTestimonial[] = [
   {
     quote:
       "Lefteris didn't just photograph our wedding — he preserved the very feeling of it. Every image tells a story we get to relive again and again.",
-    couple: "Elena & Dimitris",
+    couple: "Elizabeth & Christopher",
     location: "Mykonos, Greece",
   },
   {

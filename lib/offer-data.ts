@@ -132,10 +132,10 @@ const christeningPackage: Omit<OfferPackage, "price"> = {
   id: "christening",
   name: "Christening Coverage",
   description:
-    "A thoughtful photography experience designed to preserve the beauty and emotion of your child's christening day.",
+    "A thoughtful photography experience designed to preserve the beauty and emotion of your child's Christening day.",
   features: [
     "One Photographer — Lefteris Kalampokas",
-    "Full-day coverage, up to 6 consecutive hours",
+    "Full-day coverage, up to 8 consecutive hours",
     "Drone coverage, weather and legal conditions permitting",
     "Carefully curated high-resolution image collection",
     "Private online gallery for viewing and download",
@@ -144,6 +144,62 @@ const christeningPackage: Omit<OfferPackage, "price"> = {
 
   ],
 };
+
+const christeningAddons: Omit<OfferAddOn, "price" | "percentageCost">[] = [
+  {
+    id: "christening-extra-hour",
+    name: "Extra Hour of Coverage",
+    description: "Extended shooting time beyond your package",
+  },
+  {
+    id: "christening-photographer",
+    name: "Additional Photographer",
+    description: "Full day second shooter for complete coverage",
+  },
+  {
+    id: "christening-day-before-after",
+    name: "Rehearsal & Day-After Session",
+    description: "3 hours of intimate coverage the day before or after",
+  },
+  {
+    id: "christening-extra-day",
+    name: "Additional Event Day",
+    description: "Full coverage for a second day of celebrations",
+  },
+  {
+    id: "christening-album",
+    name: "Fine-Art Album",
+    description: "Handcrafted heirloom album with archival prints",
+  },
+  {
+    id: "christening-parent-albums",
+    name: "Parent Albums",
+    description: "Two smaller replica albums for your families",
+  },
+  {
+    id: "christening-full-nda",
+    name: "Complete Privacy Agreement",
+    description: "Full NDA — 100% privacy, no images shared publicly",
+  },
+  {
+    id: "christening-partial-nda",
+    name: "Partial Privacy Agreement",
+    description: "Partial NDA — faces remain private",
+  },
+];
+
+const christeningAddonIdToField: Record<string, string> = {
+  "christening-extra-hour": "extraHour",
+  "christening-photographer": "photographer",
+  "christening-day-before-after": "dayBeforeAfter",
+  "christening-extra-day": "extraDay",
+  "christening-album": "album",
+  "christening-parent-albums": "parentAlbums",
+  "christening-full-nda": "fullNda",
+  "christening-partial-nda": "partialNda",
+};
+
+const CHRISTENING_NDA_ADDON_IDS = new Set(["christening-full-nda", "christening-partial-nda"]);
 
 const christeningGallery = [
   "/images/portfolio/09-luxury-reception-setup.jpg",
@@ -158,13 +214,13 @@ const christeningTestimonials: OfferTestimonial[] = [
   {
     quote:
       "Lefteris captured every tender moment of our daughter's christening with such warmth and artistry. These photos are truly priceless.",
-    couple: "Maria & Giorgos",
+    couple: "Margot & George",
     location: "Athens, Greece",
   },
   {
     quote:
       "The images are stunning — every detail, every emotion, beautifully preserved. We couldn't be happier.",
-    couple: "Anna & Nikos",
+    couple: "Anna & Nico",
     location: "Thessaloniki, Greece",
   },
 ];
@@ -262,6 +318,7 @@ interface SanityOffer {
   eventLocation: string;
   eventType: string;
   christeningPrice?: number;
+  christeningAddonPrices?: Record<string, number>;
   eventPrice?: number;
   eventAddonPrices?: { extraHour?: number; thirdPhotographer?: number; expressDelivery?: number };
   packagePrices: { classic: number; refined: number; ultimate: number };
@@ -296,7 +353,14 @@ export async function getOfferBySlug(
   switch (eventType) {
     case "christening":
       packages = [{ ...christeningPackage, price: sanityOffer.christeningPrice ?? 0 }];
-      addOns = [];
+      addOns = christeningAddons.map((addon) => {
+        const field = christeningAddonIdToField[addon.id];
+        const value = sanityOffer.christeningAddonPrices?.[field] ?? 0;
+        if (CHRISTENING_NDA_ADDON_IDS.has(addon.id)) {
+          return { ...addon, price: 0, percentageCost: value };
+        }
+        return { ...addon, price: value };
+      });
       introText = christeningIntroText(sanityOffer.clientName);
       testimonials = christeningTestimonials;
       galleryImages = christeningGallery;

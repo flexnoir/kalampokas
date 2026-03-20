@@ -44,7 +44,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
     0
   );
 
-  const ndaIds = ["full-nda", "partial-nda"];
+  const ndaIds = ["full-nda", "partial-nda", "christening-full-nda", "christening-partial-nda"];
 
   const toggleAddOn = (id: string) => {
     if (!selectedPackage) {

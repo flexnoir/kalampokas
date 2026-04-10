@@ -22,7 +22,7 @@ export default function Introduction() {
               The Photographer
             </span>
             <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl font-serif font-light text-charcoal leading-[1.3]">
-              Telling Your Love Story
+              Telling Your Story
               <br />
               <span className="italic">Through Light &amp; Emotion</span>
             </h2>
@@ -30,15 +30,25 @@ export default function Introduction() {
             <div className="mt-5 w-8 h-px bg-gold/50" />
 
             <p className="mt-6 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-              With over a decade of experience capturing destination weddings across
-              Greece, Italy, and Europe, I craft images that feel as
-              timeless as the love they celebrate. Every frame is an heirloom - a
-              quiet, honest moment preserved for generations.
+              Lefteris is a destination wedding photographer known for his refined, fashion-inspired approach and a quiet, intentional way of seeing. With over a decade of experience, he creates imagery that feels effortless yet deeply considered.
             </p>
             <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-              My approach is unobtrusive and editorial. I blend into your day,
-              capturing the candid glances, the joyful tears, and the golden-hour
-              light that makes destination weddings unforgettable.
+              His work is defined by softness, light, and emotion. Each frame is crafted with a sense of timelessness, capturing moments as they unfold naturally, without intrusion or direction.
+            </p>
+            <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
+              Blending seamlessly into the rhythm of the day, Lefteris documents what is real - the subtle glances, the atmosphere, the in-between moments that often go unnoticed, yet hold the most meaning.
+            </p>
+
+            <div className="mt-8 w-8 h-px bg-gold/40" />
+
+            <p className="mt-6 text-charcoal text-[15px] font-sans font-normal">
+              Lefteris Kalampokas
+            </p>
+            <p className="mt-1 text-warm-gray text-[13px] font-sans font-light tracking-wide">
+              Editorial Wedding Photographer
+            </p>
+            <p className="mt-5 text-warm-gray text-[13px] leading-relaxed font-sans font-light">
+              Featured in leading international wedding publications.
             </p>
           </div>
         </AnimateOnScroll>

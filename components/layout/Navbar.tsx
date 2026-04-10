@@ -94,7 +94,7 @@ export default function Navbar() {
 
     </motion.nav>
 
-      {/* Mobile menu — fullscreen overlay (outside nav to avoid transform issues) */}
+      {/* Mobile menu - fullscreen overlay (outside nav to avoid transform issues) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

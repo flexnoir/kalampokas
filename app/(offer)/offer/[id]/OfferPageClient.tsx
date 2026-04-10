@@ -143,7 +143,7 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
       )}
       <OfferFooter />
 
-      {/* Sticky bottom bar — shows when a package is selected */}
+      {/* Sticky bottom bar - shows when a package is selected */}
       <AnimatePresence>
         {selectedPackage && (
           <motion.div

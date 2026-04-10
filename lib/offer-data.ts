@@ -10,7 +10,7 @@ const weddingPackages: Omit<OfferPackage, "price">[] = [
     description:
       "A refined, focused coverage of your wedding day with intentional storytelling.",
     features: [
-      "One Photographer — Lefteris Kalampokas",
+      "One Photographer - Lefteris Kalampokas",
       "Full-day coverage, up to 10 consecutive hours",
       "Drone coverage, weather and legal conditions permitting",
       "Carefully curated high-resolution image collection",
@@ -89,12 +89,12 @@ const weddingAddons: Omit<OfferAddOn, "price" | "percentageCost">[] = [
   {
     id: "full-nda",
     name: "Complete Privacy Agreement",
-    description: "Full NDA — 100% privacy, no images shared publicly",
+    description: "Full NDA - 100% privacy, no images shared publicly",
   },
   {
     id: "partial-nda",
     name: "Partial Privacy Agreement",
-    description: "Partial NDA — bride & groom faces remain private",
+    description: "Partial NDA - bride & groom faces remain private",
   },
 ];
 
@@ -110,7 +110,7 @@ const weddingGallery = [
 const weddingTestimonials: OfferTestimonial[] = [
   {
     quote:
-      "Lefteris didn't just photograph our wedding — he preserved the very feeling of it. Every image tells a story we get to relive again and again.",
+      "Lefteris didn't just photograph our wedding - he preserved the very feeling of it. Every image tells a story we get to relive again and again.",
     couple: "Elizabeth & Christopher",
     location: "Mykonos, Greece",
   },
@@ -134,7 +134,7 @@ const christeningPackage: Omit<OfferPackage, "price"> = {
   description:
     "A thoughtful photography experience designed to preserve the beauty and emotion of your child's Christening day.",
   features: [
-    "One Photographer — Lefteris Kalampokas",
+    "One Photographer - Lefteris Kalampokas",
     "Full-day coverage, up to 8 consecutive hours",
     "Drone coverage, weather and legal conditions permitting",
     "Carefully curated high-resolution image collection",
@@ -179,12 +179,12 @@ const christeningAddons: Omit<OfferAddOn, "price" | "percentageCost">[] = [
   {
     id: "christening-full-nda",
     name: "Complete Privacy Agreement",
-    description: "Full NDA — 100% privacy, no images shared publicly",
+    description: "Full NDA - 100% privacy, no images shared publicly",
   },
   {
     id: "christening-partial-nda",
     name: "Partial Privacy Agreement",
-    description: "Partial NDA — faces remain private",
+    description: "Partial NDA - faces remain private",
   },
 ];
 
@@ -219,7 +219,7 @@ const christeningTestimonials: OfferTestimonial[] = [
   },
   {
     quote:
-      "The images are stunning — every detail, every emotion, beautifully preserved. We couldn't be happier.",
+      "The images are stunning - every detail, every emotion, beautifully preserved. We couldn't be happier.",
     couple: "Anna & Nico",
     location: "Thessaloniki, Greece",
   },
@@ -284,7 +284,7 @@ const eventTestimonials: OfferTestimonial[] = [
   },
   {
     quote:
-      "Every detail, every laugh, every special moment — beautifully documented. We couldn't be more grateful.",
+      "Every detail, every laugh, every special moment - beautifully documented. We couldn't be more grateful.",
     couple: "Elizabeth & Christopher",
     location: "Mykonos, Greece",
   },

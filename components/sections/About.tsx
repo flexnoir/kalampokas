@@ -23,7 +23,7 @@ export default function About() {
   Greece gave me the light. Twelve years and three hundred weddings later, I still chase it.
 </p>
 <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-  I work across Europe — Athens, Mykonos, Santorini, Tuscany and the Amalfi Coast — for couples who want photographs that feel like cinema, not catalogues. No forced poses. No predictable moments. Just the real story, shot with intention.
+  I work across Europe - Athens, Mykonos, Santorini, Tuscany and the Amalfi Coast - for couples who want photographs that feel like cinema, not catalogues. No forced poses. No predictable moments. Just the real story, shot with intention.
 </p>
 
 <div className="mt-8 w-8 h-px bg-gold/40" />

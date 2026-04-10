@@ -38,7 +38,7 @@ export default function Hero() {
       {/* Cinematic gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal/20 via-transparent to-charcoal/70" />
 
-      {/* Content — fades out on scroll */}
+      {/* Content - fades out on scroll */}
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
         className="relative z-10 flex flex-col items-center justify-end h-full text-center px-6 pb-20 md:pb-28"
@@ -65,9 +65,9 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 3.1, ease: "easeOut" }}
           className="mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-soft-white tracking-wide leading-[1.2]"
         >
-          Timeless Moments.
+          Modern Wedding Imagery,
           <br />
-          <span className="italic">Artfully Captured</span>
+          <span className="italic">Thoughtfully Captured</span>
         </motion.h1>
 
         <motion.p

@@ -313,7 +313,7 @@ export const offer = defineType({
       const type = typeLabels[eventType] || "Wedding";
       return {
         title: title || "Untitled Offer",
-        subtitle: `${type} — ${subtitle || "No date"} — ${status || "draft"}`,
+        subtitle: `${type} - ${subtitle || "No date"} - ${status || "draft"}`,
       };
     },
   },

@@ -6,7 +6,7 @@ import SectionTitle from "../ui/SectionTitle";
 const testimonials = [
   {
     quote:
-      "He didn't just photograph our wedding — he preserved the feeling of it. Every image takes us right back to that magical evening in Mykonos.",
+      "He didn't just photograph our wedding - he preserved the feeling of it. Every image takes us right back to that magical evening in Mykonos.",
     couple: "Elizabeth & Christopher",
     location: "Mykonos",
   },
@@ -18,7 +18,7 @@ const testimonials = [
   },
   {
     quote:
-      "We wanted someone who would capture the quiet, candid moments — and that's exactly what we received. Pure art.",
+      "We wanted someone who would capture the quiet, candid moments - and that's exactly what we received. Pure art.",
     couple: "Carol & Alex",
     location: "Athens",
   },

@@ -50,7 +50,7 @@ export default function Press() {
                 key={entry.url}
                 className="flex shrink-0 w-screen h-full"
               >
-                {/* Image — left side, natural aspect ratio, full height */}
+                {/* Image - left side, natural aspect ratio, full height */}
                 <div className={`hidden md:block h-full py-8 pl-8 lg:pl-16`}>
                   <div className="relative h-full overflow-hidden" style={{ aspectRatio: "2 / 3" }}>
                     <Image
@@ -63,7 +63,7 @@ export default function Press() {
                   </div>
                 </div>
 
-                {/* Content — right side */}
+                {/* Content - right side */}
                 <div className="w-full md:w-[55%] h-full flex flex-col justify-center px-8 md:px-16 lg:px-24 relative">
                   {/* Mobile image background */}
                   <div className="absolute inset-0 md:hidden">

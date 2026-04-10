@@ -10,7 +10,6 @@ const portfolioImages: PortfolioImage[] = [
 { src: "/images/portfolio/05-bridal-veil-detail-v2.jpg", alt: "Bridal Veil Detail", width: 740, height: 1109 },
   { src: "/images/portfolio/06-bridesmaids-champagne.png", alt: "Bridesmaids Celebration", width: 1365, height: 2048 },
   { src: "/images/portfolio/07-floral-centerpiece.jpg", alt: "Floral Centerpiece", width: 900, height: 1348 },
-  { src: "/images/portfolio/08-seaside-reception.jpg", alt: "Seaside Reception", width: 900, height: 1348 },
   { src: "/images/portfolio/09-luxury-reception-setup.jpg", alt: "Luxury Reception Setup", width: 1367, height: 2048 },
   { src: "/images/portfolio/10-garden-dinner.jpg", alt: "Garden Dinner Setting", width: 800, height: 1208 },
   { src: "/images/portfolio/11-ethereal-veil.jpg", alt: "Ethereal Veil", width: 1367, height: 2048 },

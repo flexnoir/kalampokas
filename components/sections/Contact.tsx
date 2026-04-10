@@ -71,7 +71,7 @@ export default function Contact() {
                 Thank you
               </h3>
               <p className="mt-4 text-warm-gray text-[15px] font-sans font-light">
-                Your inquiry has been received. I&apos;ll be in touch within 48 hours
+                Your inquiry has been received. I&apos;ll be in touch within 24 hours
                 to discuss your celebration.
               </p>
             </div>

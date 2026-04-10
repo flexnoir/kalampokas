@@ -7,7 +7,7 @@ const messages = {
   accepted: {
     title: "Proposal Accepted",
     description:
-      "This proposal has already been accepted. Thank you — I'll be in touch soon with the next steps.",
+      "This proposal has already been accepted. Thank you - I'll be in touch soon with the next steps.",
   },
 };
 

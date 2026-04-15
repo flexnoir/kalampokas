@@ -30,7 +30,7 @@ export default function Introduction() {
             <div className="mt-5 w-8 h-px bg-gold/50" />
 
             <p className="mt-6 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-              Lefteris is a destination wedding photographer known for his refined, fashion-inspired approach and a quiet, intentional way of seeing. With over a decade of experience, he creates imagery that feels effortless yet deeply considered.
+              Lefteris is known for his refined, fashion-inspired approach and a quiet, intentional way of seeing. With over a decade of experience, he creates imagery that feels effortless yet deeply considered.
             </p>
             <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
               His work is defined by softness, light, and emotion. Each frame is crafted with a sense of timelessness, capturing moments as they unfold naturally, without intrusion or direction.

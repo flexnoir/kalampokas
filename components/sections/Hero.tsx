@@ -49,7 +49,7 @@ export default function Hero() {
           transition={{ duration: 1.5, delay: 2.4 }}
           className="text-soft-white/50 text-[10px] sm:text-[11px] uppercase tracking-[0.5em] font-sans font-light"
         >
-          Editorial Wedding Photography
+          Fine Art Wedding Photography
         </motion.span>
 
         <motion.div
@@ -76,7 +76,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 3.6 }}
           className="mt-5 text-soft-white/40 text-[12px] sm:text-[13px] font-sans font-light tracking-[0.15em]"
         >
-          Greece Worldwide
+          Greece & Beyond
         </motion.p>
 
         <motion.a

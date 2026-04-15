@@ -11,7 +11,6 @@ const portfolioImages: PortfolioImage[] = [
   { src: "/images/portfolio/06-bridesmaids-champagne.png", alt: "Bridesmaids Celebration", width: 1365, height: 2048 },
   { src: "/images/portfolio/07-floral-centerpiece.jpg", alt: "Floral Centerpiece", width: 900, height: 1348 },
   { src: "/images/portfolio/09-luxury-reception-setup.jpg", alt: "Luxury Reception Setup", width: 1367, height: 2048 },
-  { src: "/images/portfolio/10-garden-dinner.jpg", alt: "Garden Dinner Setting", width: 800, height: 1208 },
   { src: "/images/portfolio/11-ethereal-veil.jpg", alt: "Ethereal Veil", width: 1367, height: 2048 },
   { src: "/images/portfolio/12-bride-through-veil.jpg", alt: "Bride Through the Veil", width: 1536, height: 2048 },
 ];

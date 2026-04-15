@@ -45,7 +45,7 @@ export default function Introduction() {
               Lefteris Kalampokas
             </p>
             <p className="mt-1 text-warm-gray text-[13px] font-sans font-light tracking-wide">
-              Editorial Wedding Photographer
+              Fine Art Wedding Photographer
             </p>
             <p className="mt-5 text-warm-gray text-[13px] leading-relaxed font-sans font-light">
               Featured in leading international wedding publications.

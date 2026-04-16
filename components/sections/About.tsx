@@ -20,7 +20,7 @@ export default function About() {
         <AnimateOnScroll delay={0.2}>
           <div className="max-w-lg">
         <p className="text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
-  Greece gave me the light. Twelve years and three hundred weddings later, I still chase it.
+  Greece gave me the light. Twelve years and over three hundred weddings later, I still chase it.
 </p>
 <p className="mt-5 text-warm-gray text-[15px] leading-[1.85] font-sans font-light">
   I work across Europe - Athens, Mykonos, Santorini, Tuscany and the Amalfi Coast - for couples who want photographs that feel like cinema, not catalogues. No forced poses. No predictable moments. Just the real story, shot with intention.
@@ -38,7 +38,7 @@ export default function About() {
   Off-season: Cycladic light, strong coffee, and time with my wife and our dog.
 </p>
 <p className="mt-3 text-warm-gray text-[13px] leading-relaxed font-sans font-light tracking-widest uppercase">
-  Based in Greece. Available worldwide.
+  Based in Greece. Working worldwide.
 </p>
           </div>
         </AnimateOnScroll>

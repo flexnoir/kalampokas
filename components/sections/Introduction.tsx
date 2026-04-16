@@ -48,7 +48,10 @@ export default function Introduction() {
               Fine Art Wedding Photographer
             </p>
             <p className="mt-5 text-warm-gray text-[13px] leading-relaxed font-sans font-light">
-              Featured in leading international wedding publications.
+              Featured in
+              <span className="italic font-normal">Vogue</span>,{" "}
+              <span className="italic font-normal">Style Me Pretty</span>,
+              <span className="italic font-normal">Magnolia Rouge</span> & other international publications.
             </p>
           </div>
         </AnimateOnScroll>

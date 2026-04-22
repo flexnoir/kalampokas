@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"\nimport zipfile\nfrom xml.etree import ElementTree as ET\n\nwith zipfile.ZipFile\\('kalampokas-claude-code-brief.docx'\\) as z:\n    xml = z.read\\('word/document.xml'\\)\n    tree = ET.fromstring\\(xml\\)\n    ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}\n    for p in tree.findall\\('.//w:p', ns\\):\n        texts = [t.text for t in p.findall\\('.//w:t', ns\\) if t.text]\n        if texts:\n            print\\(''.join\\(texts\\)\\)\n        else:\n            print\\(\\)\n\")",
+      "Bash(npm install framer-motion @sanity/client next-sanity resend react-hook-form zod yet-another-react-lightbox sharp 2>&1 | tail -5)",
+      "Bash(npm ls @hookform/resolvers 2>&1 || true)",
+      "Bash(npm install @hookform/resolvers 2>&1 | tail -3)",
+      "Bash(cd /root/projects/kalampokas/kalampokas-fotografia && npm run build 2>&1)",
+      "Bash(npm run build 2>&1 | tail -10)",
+      "Bash(npm run build 2>&1 | tail -5)",
+      "WebFetch(domain:new.express.adobe.com)",
+      "WebFetch(domain:portal.roman-ivanov.com)",
+      "Bash(npm run build 2>&1)",
+      "Bash(npm install sanity sanity-plugin-media styled-components 2>&1 | tail -20)"
+    ]
+  }
+}

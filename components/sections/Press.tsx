@@ -6,6 +6,12 @@ import Image from "next/image";
 
 const pressFeatures = [
   {
+    title: "A Romantic Corfu Wedding with Effortless Elegance",
+    coverImage: "/images/press-05.jpg",
+    url: "https://magnoliarouge.com/a-romantic-corfu-wedding-with-effortless-elegance/",
+    publication: "Magnolia Rouge",
+  },
+  {
     title:
       "Embracing Airy, Greek Summer Vibes at Ammoa Luxury Hotel & Spa Resort",
     coverImage: "/images/press-1.jpg",
@@ -23,12 +29,6 @@ const pressFeatures = [
     coverImage: "/images/press-4.jpg",
     url: "https://amberandmuse.com/vogue-wedding-in-greece/",
     publication: "Amber & Muse",
-  },
-  {
-    title: "A Romantic Corfu Wedding with Effortless Elegance",
-    coverImage: "/images/press-05.jpg",
-    url: "https://magnoliarouge.com/a-romantic-corfu-wedding-with-effortless-elegance/",
-    publication: "Magnolia Rouge",
   },
 ];
 

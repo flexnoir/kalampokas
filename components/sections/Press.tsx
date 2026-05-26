@@ -6,7 +6,8 @@ import Image from "next/image";
 
 const pressFeatures = [
   {
-    title: "Embracing Airy, Greek Summer Vibes at Ammoa Luxury Hotel & Spa Resort",
+    title:
+      "Embracing Airy, Greek Summer Vibes at Ammoa Luxury Hotel & Spa Resort",
     coverImage: "/images/press-1.jpg",
     url: "https://www.stylemepretty.com/2025/03/10/embracing-airy-greek-summer-vibes-at-ammoa-luxury-hotel-spa-resort/",
     publication: "Style Me Pretty",
@@ -22,6 +23,12 @@ const pressFeatures = [
     coverImage: "/images/press-4.jpg",
     url: "https://amberandmuse.com/vogue-wedding-in-greece/",
     publication: "Amber & Muse",
+  },
+  {
+    title: "A Romantic Corfu Wedding with Effortless Elegance",
+    coverImage: "/images/press-05.jpg",
+    url: "https://magnoliarouge.com/a-romantic-corfu-wedding-with-effortless-elegance/",
+    publication: "Magnolia Rouge",
   },
 ];
 
@@ -46,13 +53,13 @@ export default function Press() {
             {/* Empty spacer before first card */}
             <div className="shrink-0 w-[40vw]" />
             {pressFeatures.map((entry, i) => (
-              <div
-                key={entry.url}
-                className="flex shrink-0 w-screen h-full"
-              >
+              <div key={entry.url} className="flex shrink-0 w-screen h-full">
                 {/* Image - left side, natural aspect ratio, full height */}
                 <div className={`hidden md:block h-full py-8 pl-8 lg:pl-16`}>
-                  <div className="relative h-full overflow-hidden" style={{ aspectRatio: "2 / 3" }}>
+                  <div
+                    className="relative h-full overflow-hidden"
+                    style={{ aspectRatio: "2 / 3" }}
+                  >
                     <Image
                       src={entry.coverImage}
                       alt={entry.title}
@@ -106,7 +113,8 @@ export default function Press() {
                   {/* Slide counter */}
                   <div className="absolute bottom-10 right-8 md:right-16 lg:right-24">
                     <span className="text-[11px] text-soft-white/15 font-sans font-light tracking-wider">
-                      {String(i + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+                      {String(i + 1).padStart(2, "0")} /{" "}
+                      {String(count).padStart(2, "0")}
                     </span>
                   </div>
                 </div>

@@ -3,6 +3,8 @@ import type {
   OfferPackage,
   OfferAddOn,
   OfferTestimonial,
+  AcceptedPackageSnapshot,
+  AcceptedAddOnSnapshot,
 } from "@/types";
 import { client, offerBySlugQuery } from "@/lib/sanity";
 
@@ -355,6 +357,11 @@ interface SanityOffer {
   isWeddingPlanner: boolean;
   isExpired: boolean;
   status: string;
+  acceptedPackage?: AcceptedPackageSnapshot;
+  acceptedAddOns?: AcceptedAddOnSnapshot[];
+  acceptedMessage?: string;
+  acceptedTotalPrice?: number;
+  acceptedAt?: string;
 }
 
 export async function getOfferBySlug(slug: string): Promise<OfferData | null> {
@@ -450,5 +457,10 @@ export async function getOfferBySlug(slug: string): Promise<OfferData | null> {
     status: (sanityOffer.status as OfferData["status"]) || "draft",
     isExpired: sanityOffer.isExpired ?? false,
     isWeddingPlanner: sanityOffer.isWeddingPlanner ?? false,
+    acceptedPackage: sanityOffer.acceptedPackage,
+    acceptedAddOns: sanityOffer.acceptedAddOns,
+    acceptedMessage: sanityOffer.acceptedMessage,
+    acceptedTotalPrice: sanityOffer.acceptedTotalPrice,
+    acceptedAt: sanityOffer.acceptedAt,
   };
 }

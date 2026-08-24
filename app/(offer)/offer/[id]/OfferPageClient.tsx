@@ -22,14 +22,45 @@ function formatPrice(price: number): string {
 }
 
 export default function OfferPageClient({ offer }: { offer: OfferData }) {
-  const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
-  const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>([]);
-  const [addOnQuantities, setAddOnQuantities] = useState<Record<string, number>>({});
+  const wasAccepted = offer.status === "accepted" && !!offer.acceptedPackage;
+
+  const [selectedPackageId, setSelectedPackageId] = useState<string | null>(
+    wasAccepted ? offer.acceptedPackage!.id : null
+  );
+  const [selectedAddOnIds, setSelectedAddOnIds] = useState<string[]>(
+    wasAccepted ? (offer.acceptedAddOns ?? []).map((a) => a.id) : []
+  );
+  const [addOnQuantities, setAddOnQuantities] = useState<Record<string, number>>(
+    wasAccepted
+      ? Object.fromEntries((offer.acceptedAddOns ?? []).map((a) => [a.id, a.quantity]))
+      : {}
+  );
   const [showSelectPackageMessage, setShowSelectPackageMessage] = useState(false);
   const selectPackageMessageTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const selectedPackage = offer.packages.find((p) => p.id === selectedPackageId) ?? null;
-  const selectedAddOns = offer.addOns.filter((a) => selectedAddOnIds.includes(a.id));
+  const selectedPackage = wasAccepted
+    ? {
+        ...(offer.packages.find((p) => p.id === selectedPackageId) ?? {
+          id: offer.acceptedPackage!.id,
+          description: "",
+          features: [],
+        }),
+        name: offer.acceptedPackage!.name,
+        price: offer.acceptedPackage!.price,
+      }
+    : offer.packages.find((p) => p.id === selectedPackageId) ?? null;
+  const selectedAddOns = wasAccepted
+    ? (offer.acceptedAddOns ?? []).map((a) => {
+        const catalogAddOn = offer.addOns.find((c) => c.id === a.id);
+        return {
+          ...(catalogAddOn ?? { id: a.id, description: "" }),
+          name: a.name,
+          price: a.price,
+          supportsQuantity: a.quantity > 1,
+          percentageCost: undefined,
+        };
+      })
+    : offer.addOns.filter((a) => selectedAddOnIds.includes(a.id));
   const packagePrice = selectedPackage?.price ?? 0;
   const getAddOnQuantity = (id: string) => Math.max(1, addOnQuantities[id] ?? 1);
   const addOnsFixedTotal = selectedAddOns
@@ -38,7 +69,9 @@ export default function OfferPageClient({ offer }: { offer: OfferData }) {
   const addOnsPercentageTotal = selectedAddOns
     .filter((a) => a.percentageCost)
     .reduce((sum, a) => Math.round(packagePrice * (a.percentageCost! / 100)) + sum, 0);
-  const totalPrice = packagePrice + addOnsFixedTotal + addOnsPercentageTotal;
+  const totalPrice = wasAccepted
+    ? offer.acceptedTotalPrice ?? packagePrice + addOnsFixedTotal + addOnsPercentageTotal
+    : packagePrice + addOnsFixedTotal + addOnsPercentageTotal;
   const totalAddOnUnits = selectedAddOns.reduce(
     (sum, addon) => sum + (addon.supportsQuantity ? getAddOnQuantity(addon.id) : 1),
     0

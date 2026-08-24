@@ -283,6 +283,52 @@ export const offer = defineType({
       type: "datetime",
       readOnly: true,
     }),
+    defineField({
+      name: "acceptedPackage",
+      title: "Accepted Package",
+      type: "object",
+      readOnly: true,
+      fields: [
+        defineField({ name: "id", title: "ID", type: "string" }),
+        defineField({ name: "name", title: "Name", type: "string" }),
+        defineField({ name: "price", title: "Price", type: "number" }),
+      ],
+    }),
+    defineField({
+      name: "acceptedAddOns",
+      title: "Accepted Add-Ons",
+      type: "array",
+      readOnly: true,
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "id", title: "ID", type: "string" }),
+            defineField({ name: "name", title: "Name", type: "string" }),
+            defineField({ name: "price", title: "Price", type: "number" }),
+            defineField({ name: "quantity", title: "Quantity", type: "number" }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "acceptedMessage",
+      title: "Message From Client",
+      type: "text",
+      readOnly: true,
+    }),
+    defineField({
+      name: "acceptedTotalPrice",
+      title: "Accepted Total Price",
+      type: "number",
+      readOnly: true,
+    }),
+    defineField({
+      name: "acceptedAt",
+      title: "Accepted At",
+      type: "datetime",
+      readOnly: true,
+    }),
   ],
   initialValue: () => ({
     createdAt: new Date().toISOString(),
@@ -311,7 +357,7 @@ export const offer = defineType({
       extraDay: 1500,
       album: 500,
       parentAlbums: 400,
-      film35mm: 350,
+      film35mm: 500,
       fullNda: 20,
       partialNda: 10,
     },
@@ -319,7 +365,7 @@ export const offer = defineType({
       extraHour: 250,
       thirdPhotographer: 550,
       expressDelivery: 500,
-      film35mm: 400,
+      film35mm: 500,
     },
   }),
   preview: {

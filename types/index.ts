@@ -41,6 +41,19 @@ export interface OfferTestimonial {
   location: string;
 }
 
+export interface AcceptedPackageSnapshot {
+  id: string;
+  name: string;
+  price: number;
+}
+
+export interface AcceptedAddOnSnapshot {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 export interface OfferData {
   id: string;
   clientName: string;
@@ -56,4 +69,9 @@ export interface OfferData {
   status: "draft" | "sent" | "accepted";
   isExpired: boolean;
   isWeddingPlanner: boolean;
+  acceptedPackage?: AcceptedPackageSnapshot;
+  acceptedAddOns?: AcceptedAddOnSnapshot[];
+  acceptedMessage?: string;
+  acceptedTotalPrice?: number;
+  acceptedAt?: string;
 }

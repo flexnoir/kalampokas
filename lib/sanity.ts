@@ -33,5 +33,10 @@ export const offerBySlugQuery = `*[_type == "offer" && slug.current == $slug][0]
   isWeddingPlanner,
   isExpired,
   status,
-  createdAt
+  createdAt,
+  acceptedPackage,
+  acceptedAddOns,
+  acceptedMessage,
+  acceptedTotalPrice,
+  acceptedAt
 }`;

@@ -35,12 +35,29 @@ export default function OfferResponse({
   const [status, setStatus] = useState<"idle" | "sending" | "accepted" | "error">("idle");
 
   const handleAccept = async () => {
+    if (!selectedPackage) return;
     setStatus("sending");
     try {
       const res = await fetch(`/api/offers/${offerId}/respond`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({
+          message,
+          package: {
+            id: selectedPackage.id,
+            name: selectedPackage.name,
+            price: selectedPackage.price,
+          },
+          addOns: selectedAddOns.map((addon) => ({
+            id: addon.id,
+            name: addon.name,
+            quantity: addon.supportsQuantity ? Math.max(1, addOnQuantities[addon.id] ?? 1) : 1,
+            price: addon.percentageCost
+              ? Math.round(selectedPackage.price * (addon.percentageCost / 100))
+              : addon.price,
+          })),
+          totalPrice,
+        }),
       });
       if (!res.ok) throw new Error("Failed");
       setStatus("accepted");

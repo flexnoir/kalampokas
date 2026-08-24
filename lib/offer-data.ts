@@ -221,15 +221,6 @@ const CHRISTENING_NDA_ADDON_IDS = new Set([
   "christening-partial-nda",
 ]);
 
-const christeningGallery = [
-  "/images/portfolio/09-luxury-reception-setup.jpg",
-  "/images/portfolio/10-garden-dinner.jpg",
-  "/images/portfolio/02-greek-chapel.jpg",
-  "/images/portfolio/07-floral-centerpiece.jpg",
-  "/images/portfolio/08-seaside-reception.jpg",
-  "/images/wedding/05-aerial-view.jpg",
-];
-
 const christeningTestimonials: OfferTestimonial[] = [
   {
     quote:
@@ -289,15 +280,6 @@ const eventAddons: Omit<OfferAddOn, "price">[] = [
     name: "35mm Film Photography",
     description: "An intimate collection of photographs captured on analogue film.",
   },
-];
-
-const eventGallery = [
-  "/images/events/01-underworld-setup.jpg",
-  "/images/events/02-versailles-crowd.jpg",
-  "/images/events/03-havana-dancers.jpg",
-  "/images/events/04-evalend-bar.jpg",
-  "/images/events/05-havana-portrait.jpg",
-  "/images/events/06-versailles-masquerade.jpg",
 ];
 
 const eventTestimonials: OfferTestimonial[] = [
@@ -400,7 +382,7 @@ export async function getOfferBySlug(slug: string): Promise<OfferData | null> {
       });
       introText = christeningIntroText(sanityOffer.clientName);
       testimonials = christeningTestimonials;
-      galleryImages = christeningGallery;
+      galleryImages = weddingGallery;
       break;
     case "event": {
       packages = [{ ...eventPackage, price: sanityOffer.eventPrice ?? 0 }];
@@ -417,7 +399,7 @@ export async function getOfferBySlug(slug: string): Promise<OfferData | null> {
       }));
       introText = eventIntroText(sanityOffer.clientName);
       testimonials = eventTestimonials;
-      galleryImages = eventGallery;
+      galleryImages = weddingGallery;
       break;
     }
     default: // wedding

@@ -12,7 +12,10 @@ export default function OfferGallery({ images }: OfferGalleryProps) {
   return (
     <section className="py-16 md:py-32">
       <div className="max-w-6xl mx-auto px-6 lg:px-16">
-        <SectionTitle label="Recent Work" title="A Preview of Your Story" />
+        <SectionTitle
+          label="Lefteris Kalampokas"
+          title="The Art of Remembering"
+        />
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           {images.map((src, i) => (

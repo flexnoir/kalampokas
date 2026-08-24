@@ -108,6 +108,12 @@ export const offer = defineType({
           validation: (rule) => rule.min(0),
         }),
         defineField({
+          name: "film35mm",
+          title: "35mm Film Photography",
+          type: "number",
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
           name: "fullNda",
           title: "Complete Privacy Agreement (%)",
           type: "number",
@@ -151,6 +157,12 @@ export const offer = defineType({
         defineField({
           name: "expressDelivery",
           title: "Express Delivery (5 days)",
+          type: "number",
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
+          name: "film35mm",
+          title: "35mm Film Photography",
           type: "number",
           validation: (rule) => rule.min(0),
         }),
@@ -225,6 +237,12 @@ export const offer = defineType({
           validation: (rule) => rule.min(0),
         }),
         defineField({
+          name: "film35mm",
+          title: "35mm Film Photography",
+          type: "number",
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
           name: "fullNda",
           title: "Complete Privacy Agreement (%)",
           type: "number",
@@ -282,6 +300,7 @@ export const offer = defineType({
       extraDay: 2000,
       album: 500,
       parentAlbums: 400,
+      film35mm: 500,
       fullNda: 20,
       partialNda: 10,
     },
@@ -292,6 +311,7 @@ export const offer = defineType({
       extraDay: 1500,
       album: 500,
       parentAlbums: 400,
+      film35mm: 350,
       fullNda: 20,
       partialNda: 10,
     },
@@ -299,6 +319,7 @@ export const offer = defineType({
       extraHour: 250,
       thirdPhotographer: 550,
       expressDelivery: 500,
+      film35mm: 400,
     },
   }),
   preview: {

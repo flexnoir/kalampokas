@@ -1,4 +1,9 @@
-import type { OfferData, OfferPackage, OfferAddOn, OfferTestimonial } from "@/types";
+import type {
+  OfferData,
+  OfferPackage,
+  OfferAddOn,
+  OfferTestimonial,
+} from "@/types";
 import { client, offerBySlugQuery } from "@/lib/sanity";
 
 // ─── Wedding content ───
@@ -87,6 +92,11 @@ const weddingAddons: Omit<OfferAddOn, "price" | "percentageCost">[] = [
     description: "Two smaller replica albums for your families",
   },
   {
+    id: "film-35mm",
+    name: "35mm Film Photography",
+    description: "An intimate collection of photographs captured on analogue film.",
+  },
+  {
     id: "full-nda",
     name: "Complete Privacy Agreement",
     description: "Full NDA - 100% privacy, no images shared publicly",
@@ -135,13 +145,12 @@ const christeningPackage: Omit<OfferPackage, "price"> = {
     "A thoughtful photography experience designed to preserve the beauty and emotion of your child's Christening day.",
   features: [
     "One Photographer - Lefteris Kalampokas",
-    "Full-day coverage, up to 8 consecutive hours",
+    "Full-day coverage, up to 6 consecutive hours",
     "Drone coverage, weather and legal conditions permitting",
     "Carefully curated high-resolution image collection",
     "Private online gallery for viewing and download",
     "Preview selection delivered within the first week",
-    "Full gallery delivered within approximately six weeks"
-
+    "Full gallery delivered within approximately two months",
   ],
 };
 
@@ -177,6 +186,11 @@ const christeningAddons: Omit<OfferAddOn, "price" | "percentageCost">[] = [
     description: "Two smaller replica albums for your families",
   },
   {
+    id: "christening-film-35mm",
+    name: "35mm Film Photography",
+    description: "An intimate collection of photographs captured on analogue film.",
+  },
+  {
     id: "christening-full-nda",
     name: "Complete Privacy Agreement",
     description: "Full NDA - 100% privacy, no images shared publicly",
@@ -195,11 +209,15 @@ const christeningAddonIdToField: Record<string, string> = {
   "christening-extra-day": "extraDay",
   "christening-album": "album",
   "christening-parent-albums": "parentAlbums",
+  "christening-film-35mm": "film35mm",
   "christening-full-nda": "fullNda",
   "christening-partial-nda": "partialNda",
 };
 
-const CHRISTENING_NDA_ADDON_IDS = new Set(["christening-full-nda", "christening-partial-nda"]);
+const CHRISTENING_NDA_ADDON_IDS = new Set([
+  "christening-full-nda",
+  "christening-partial-nda",
+]);
 
 const christeningGallery = [
   "/images/portfolio/09-luxury-reception-setup.jpg",
@@ -264,6 +282,11 @@ const eventAddons: Omit<OfferAddOn, "price">[] = [
     name: "Express Delivery",
     description: "Receive your edited gallery within 5 working days",
   },
+  {
+    id: "event-film-35mm",
+    name: "35mm Film Photography",
+    description: "An intimate collection of photographs captured on analogue film.",
+  },
 ];
 
 const eventGallery = [
@@ -303,6 +326,7 @@ const addonIdToField: Record<string, string> = {
   "extra-day": "extraDay",
   album: "album",
   "parent-albums": "parentAlbums",
+  "film-35mm": "film35mm",
   "full-nda": "fullNda",
   "partial-nda": "partialNda",
 };
@@ -320,7 +344,12 @@ interface SanityOffer {
   christeningPrice?: number;
   christeningAddonPrices?: Record<string, number>;
   eventPrice?: number;
-  eventAddonPrices?: { extraHour?: number; thirdPhotographer?: number; expressDelivery?: number };
+  eventAddonPrices?: {
+    extraHour?: number;
+    thirdPhotographer?: number;
+    expressDelivery?: number;
+    film35mm?: number;
+  };
   packagePrices: { classic: number; refined: number; ultimate: number };
   addonPrices: Record<string, number>;
   isWeddingPlanner: boolean;
@@ -328,20 +357,19 @@ interface SanityOffer {
   status: string;
 }
 
-export async function getOfferBySlug(
-  slug: string
-): Promise<OfferData | null> {
+export async function getOfferBySlug(slug: string): Promise<OfferData | null> {
   const sanityOffer = await client.fetch<SanityOffer | null>(
     offerBySlugQuery,
     { slug },
-    { next: { revalidate: 0 } }
+    { next: { revalidate: 0 } },
   );
 
   if (!sanityOffer) {
     return null;
   }
 
-  const eventType = (sanityOffer.eventType || "wedding") as OfferData["eventType"];
+  const eventType = (sanityOffer.eventType ||
+    "wedding") as OfferData["eventType"];
 
   // Build packages
   let packages: OfferPackage[];
@@ -352,7 +380,9 @@ export async function getOfferBySlug(
 
   switch (eventType) {
     case "christening":
-      packages = [{ ...christeningPackage, price: sanityOffer.christeningPrice ?? 0 }];
+      packages = [
+        { ...christeningPackage, price: sanityOffer.christeningPrice ?? 0 },
+      ];
       addOns = christeningAddons.map((addon) => {
         const field = christeningAddonIdToField[addon.id];
         const value = sanityOffer.christeningAddonPrices?.[field] ?? 0;
@@ -372,6 +402,7 @@ export async function getOfferBySlug(
         "event-extra-hour": "extraHour",
         "event-third-photographer": "thirdPhotographer",
         "event-express-delivery": "expressDelivery",
+        "event-film-35mm": "film35mm",
       };
       addOns = eventAddons.map((addon) => ({
         ...addon,
@@ -385,7 +416,10 @@ export async function getOfferBySlug(
     default: // wedding
       packages = weddingPackages.map((pkg) => ({
         ...pkg,
-        price: sanityOffer.packagePrices?.[pkg.id as keyof typeof sanityOffer.packagePrices] ?? 0,
+        price:
+          sanityOffer.packagePrices?.[
+            pkg.id as keyof typeof sanityOffer.packagePrices
+          ] ?? 0,
       }));
       addOns = weddingAddons.map((addon) => {
         const field = addonIdToField[addon.id];
@@ -413,7 +447,7 @@ export async function getOfferBySlug(
     galleryImages,
     photographerName: "Lefteris",
     eventType,
-    status: sanityOffer.status as OfferData["status"] || "draft",
+    status: (sanityOffer.status as OfferData["status"]) || "draft",
     isExpired: sanityOffer.isExpired ?? false,
     isWeddingPlanner: sanityOffer.isWeddingPlanner ?? false,
   };
